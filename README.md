@@ -29,6 +29,11 @@ The web app uses the address it was opened from, so the same build works over
 the local network and Tailscale. Do not expose port 8081 directly on the
 router.
 
+To prepare everything and start the remote server, right-click
+`run-remote-server.bat` and choose **Run as administrator**. It creates the
+Firewall rule, opens Tailscale login when needed, prints the developer URL,
+and starts the server.
+
 For the Windows helper that also starts the client explorer, run
 `resources/app/run-server.bat`. Set `VENOM_EXPLORER_HOST` and
 `VENOM_EXPLORER_PORT` before launching it when the explorer is on another
