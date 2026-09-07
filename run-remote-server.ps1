@@ -6,9 +6,12 @@ $firewallRule = 'VENOM NET Server 8081'
 $tailscale = 'C:\Program Files\Tailscale\tailscale.exe'
 
 if (-not (Test-Path -LiteralPath $tailscale)) {
-    Write-Host 'Tailscale is not installed. Install it first with:' -ForegroundColor Yellow
-    Write-Host 'winget install --id Tailscale.Tailscale --exact' -ForegroundColor Yellow
-    exit 1
+    Write-Host 'Installing Tailscale...' -ForegroundColor Yellow
+    winget install --id Tailscale.Tailscale --exact --source winget --accept-source-agreements --accept-package-agreements
+    if (-not (Test-Path -LiteralPath $tailscale)) {
+        Write-Host 'Tailscale installation failed. Install it manually, then run this script again.' -ForegroundColor Red
+        exit 1
+    }
 }
 
 $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
