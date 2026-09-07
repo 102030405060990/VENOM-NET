@@ -53,6 +53,7 @@ exports.serveStatic = (req, res) => {
         
         res.setHeader('Content-Type', contentType);
         res.setHeader('Content-Length', stat.size);
+        res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
         
         const stream = fs.createReadStream(filePath);
         stream.pipe(res);

@@ -206,22 +206,18 @@ function renderFolderContent(main, breadcrumbs, items, hasMore, title = '') {
         });
     });
     
-    // ⚡ أول 20 بوستر بأولوية قصوى عند دخول المجلد
+        // تحميل البطاقات الأولى فقط؛ البقية عند اقترابها من الشاشة.
     // استخدم الشبكة من DOM بدلاً من متغير grid غير الموجود داخل هذه الدالة.
     const folderGridEl = document.querySelector('#folderGrid');
 
     if (folderGridEl) {
-        const first20PosterNodes = Array.from(
+        const firstPosterNodes = Array.from(
             folderGridEl.querySelectorAll(
                 '.movie-box[data-is-folder="true"], .movie-box[data-is-video="true"]'
             )
-        ).slice(0, 20);
+        ).slice(0, 12);
 
-        // تحميل أول 20 فوراً وبالتوازي
-        loadPostersForFolderItems(first20PosterNodes);
-
-        // بقية البوسترات تستمر تلقائياً في الخلفية
-        loadPostersForFolderItems();
+        loadPostersForFolderItems(firstPosterNodes);
     }
 
     setupFolderInfiniteScroll();
@@ -261,7 +257,7 @@ async function openFolderPoster(itemPath, itemTitle, listedPoster = '') {
 // ============================================================
 const folderPosterCache = new Map();
 const folderPosterLoading = new Set();
-const FOLDER_POSTER_CONCURRENCY = 20;
+const FOLDER_POSTER_CONCURRENCY = 8;
 
 function setFolderPoster(el, posterUrl) {
     if (!el || !posterUrl) return;
