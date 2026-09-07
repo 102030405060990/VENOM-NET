@@ -42,7 +42,7 @@ try { localStorage.removeItem(VENOM_SERVER_URL_KEY); } catch (_) {}
 // http://192.168.0.81:8081
 // http://192.168.0.82:8081
 // ============================================================
-const MANUAL_SERVER_URL = 'http://192.168.0.81:8081';
+const MANUAL_SERVER_URL = 'http://192.168.0.211:8081';
 
 const SERVER_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
     ? window.location.origin
@@ -58,7 +58,7 @@ const LEGACY_DEFAULT_SETTINGS = {
     bgImage: null,
     logoImage: null,
     servers: [
-        { id: 'main', name: 'السيرفر الرئيسي', ip: '192.168.0.81' }
+        { id: 'main', name: 'السيرفر الرئيسي', ip: '192.168.0.211' }
     ],
     disks: [
         { id: 'movies', name: 'الأفلام', icon: '🎬', iconImage: null, path: '\\\\192.168.0.81\\d\\الافلام', serverId: 'main', category: 'movies' },

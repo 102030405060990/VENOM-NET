@@ -6,7 +6,7 @@ title VENOM NET - Server + Client Explorer
 
 echo ========================================
 echo   VENOM NET
-echo   Server: 192.168.0.81:8081
+echo   Server: 192.168.0.211:8081
 echo   Client Explorer: 192.168.0.80:8765
 echo ========================================
 echo.
