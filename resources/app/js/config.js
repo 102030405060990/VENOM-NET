@@ -44,9 +44,7 @@ try { localStorage.removeItem(VENOM_SERVER_URL_KEY); } catch (_) {}
 // ============================================================
 const MANUAL_SERVER_URL = 'http://192.168.0.211:8081';
 
-const SERVER_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? window.location.origin
-    : MANUAL_SERVER_URL.replace(/\/$/, '');
+const SERVER_URL = window.location.origin;
 window.VENOM_SERVER_URL = SERVER_URL;
 window.getVenomSavedServerUrl = getVenomSavedServerUrl;
 window.saveVenomServerUrl = saveVenomServerUrl;
