@@ -1,0 +1,31 @@
+.movie-full-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: radial-gradient(circle at 30% 40%, #2d1b69, #1a1a3e, #0d0c11);
+}
+.movie-full-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.58) saturate(1.08);
+    transform: none;
+    display: block;
+}
+.movie-full-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 9, 12, 0.22), rgba(7, 9, 12, 0.42));
+}
+
+body:has(.movie-detail-container),
+#appContainer:has(.movie-detail-container),
+#main:has(.movie-detail-container) {
+    background: transparent !important;
+}

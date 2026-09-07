@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <meta
+        name="google"
+        content="notranslate">
+
+    <title>VENOM NET</title>
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link rel="stylesheet" href="css/00-variables.css">
+    <link rel="stylesheet" href="css/01-reset.css">
+    <link rel="stylesheet" href="css/02-splash.css">
+    <link rel="stylesheet" href="css/03-header.css">
+    <link rel="stylesheet" href="css/04-main.css">
+    <link rel="stylesheet" href="css/05-movie-bg.css">
+    <link rel="stylesheet" href="css/06-movie-detail.css">
+    <link rel="stylesheet" href="css/07-episodes.css">
+    <link rel="stylesheet" href="css/08-breadcrumbs.css">
+    <link rel="stylesheet" href="css/09-cards.css">
+    <link rel="stylesheet" href="css/10-empty.css">
+    <link rel="stylesheet" href="css/11-toast.css">
+    <link rel="stylesheet" href="css/12-player.css">
+    <link rel="stylesheet" href="css/13-hero.css">
+    <link rel="stylesheet" href="css/14-sections.css">
+    <link rel="stylesheet" href="css/15-settings.css">
+    <link rel="stylesheet" href="css/16-assistant.css">
+
+
+    <!-- =====================================================
+         حماية زر الإعدادات
+    ====================================================== -->
+
+    <style>
+
+        #settingsToggle {
+            cursor: pointer;
+            pointer-events: auto;
+            position: relative;
+            z-index: 99999;
+        }
+
+        #mainHeader {
+            position: relative;
+            z-index: 99998;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         شاشة البداية
+    ====================================================== -->
+
+    <div id="splashScreen">
+
+        <div class="splash-logo">
+            VENOM NET
+        </div>
+
+        <div
+            id="splashStatus"
+            class="splash-status">
+
+            جاري الاتصال بالسيرفر...
+
+        </div>
+
+        <div class="progress-bar-container">
+
+            <div
+                id="progressBarFill"
+                class="progress-bar-fill">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         التطبيق
+    ====================================================== -->
+
+    <div
+        class="app"
+        id="appContainer">
+
+
+        <!-- =================================================
+             خلفية الفيلم
+        ================================================== -->
+
+        <div
+            id="movieFullBg"
+            class="movie-full-bg"
+            style="display:none;">
+
+            <img
+                id="movieBgImg"
+                src=""
+                alt="">
+
+        </div>
+
+
+        <!-- =================================================
+             الهيدر
+        ================================================== -->
+
+        <header
+            class="top"
+            id="mainHeader">
+
+            <nav
+                class="nav"
+                id="navBar">
+
+
+                <!-- =========================================
+                     الشعار
+                ========================================== -->
+
+                <div
+                    class="brand venom-logo"
+                    onclick="home()"
+                    title="الرئيسية"
+                    aria-label="VENOM NET الرئيسية">
+
+                    <span class="venom-logo-word">
+                        VENOM NET
+                    </span>
+
+                    <span
+                        class="venom-logo-mark"
+                        aria-hidden="true">
+
+                        <i></i>
+                        <i></i>
+                        <i></i>
+
+                    </span>
+
+                </div>
+
+
+                <!-- =========================================
+                     التنقل
+                ========================================== -->
+
+                <div
+                    class="hero-nav-bar"
+                    id="heroNavBar">
+
+                    <div class="hero-nav-links">
+
+                        <a
+                            href="/"
+                            class="hero-nav-link active">
+
+                            الرئيسية
+
+                        </a>
+
+                        <a
+                            href="/movies"
+                            class="hero-nav-link">
+
+                            أفلام
+
+                        </a>
+
+                        <a
+                            href="/series"
+                            class="hero-nav-link">
+
+                            مسلسلات
+
+                        </a>
+
+                        <a
+                            href="/sports"
+                            class="hero-nav-link">
+
+                            رياضة
+
+                        </a>
+
+                        <a
+                            href="/anime"
+                            class="hero-nav-link">
+
+                            أنمي
+
+                        </a>
+
+                        <a
+                            href="/music"
+                            class="hero-nav-link">
+
+                            أغاني
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         البحث
+                    ====================================== -->
+
+                    <div class="hero-search-wrap">
+
+                        <span
+                            class="hero-search-icon"
+                            aria-hidden="true">
+
+                            ⌕
+
+                        </span>
+
+                        <input
+                            id="heroSearch"
+                            class="hero-search"
+                            type="search"
+                            placeholder="بحث..."
+                            autocomplete="off"
+                            aria-label="بحث">
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     أدوات الهيدر
+                ========================================== -->
+
+                <div class="header-actions">
+
+
+                    <!-- =====================================
+                         الإعدادات
+                    ====================================== -->
+
+                    <button
+                        class="header-icon-btn"
+                        id="settingsToggle"
+                        type="button"
+                        title="الإعدادات"
+                        aria-label="فتح الإعدادات">
+
+                        <span aria-hidden="true">
+                            ⚙
+                        </span>
+
+                    </button>
+
+
+                    <!-- =====================================
+                         اللغة
+                    ====================================== -->
+
+                    <button
+                        class="lang-btn"
+                        id="langToggle"
+                        type="button"
+                        title="العربية"
+                        aria-label="العربية">
+
+                        <span>
+                            عربي
+                        </span>
+
+                        <span
+                            class="lang-globe"
+                            aria-hidden="true">
+
+                            ◎
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+
+        <!-- =================================================
+             المحتوى الرئيسي
+        ================================================== -->
+
+        <main id="main"></main>
+
+
+        <!-- =================================================
+             مشغل الفيديو
+        ================================================== -->
+
+        <div
+            id="player"
+            class="player"
+            style="display:none;">
+
+            <div class="playerbar">
+
+                <div
+                    id="playerTitle"
+                    class="playerTitle">
+                </div>
+
+                <button
+                    id="closePlayer"
+                    class="close"
+                    type="button"
+                    title="إغلاق المشغل"
+                    aria-label="إغلاق المشغل"
+                    onclick="closeVideo()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+            <div class="videoWrap">
+
+                <div id="playerFeedback" class="playerFeedback" aria-live="polite"></div>
+
+                <video
+                    id="video"
+                    controls
+                    autoplay
+                    playsinline
+                    preload="auto"
+                    crossorigin="anonymous"
+                    style="
+                        width:100%;
+                        height:100%;
+                        background:#000;
+                    ">
+
+                ></video>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         Toast
+    ====================================================== -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+
+    <!-- =====================================================
+         VENOM NET — JAVASCRIPT
+         
+         الترتيب مهم جداً:
+         - يتم تحميل folder.js و movie.js قبل disks.js
+         حتى تتوفر دوال renderFolder و renderMovie عند استدعائها
+    ====================================================== -->
+
+
+    <!-- =====================================================
+         1 — CONFIG
+    ====================================================== -->
+
+    <script src="js/config.js"></script>
+
+
+    <!-- =====================================================
+         2 — UTILS
+    ====================================================== -->
+
+    <script src="js/utils.js"></script>
+
+
+    <!-- =====================================================
+         3 — API
+    ====================================================== -->
+
+    <script src="js/api.js"></script>
+
+
+    <!-- =====================================================
+         4 — ADS
+    ====================================================== -->
+
+    <script src="js/ads.js"></script>
+
+
+    <!-- =====================================================
+         5 — SETTINGS
+    ====================================================== -->
+
+    <script src="js/settings.js"></script>
+
+
+    <!-- =====================================================
+         6 — NAV (ملاحة أساسية)
+    ====================================================== -->
+
+    <script src="js/nav.js"></script>
+
+
+    <!-- =====================================================
+         7 — NAVIGATION (تنقل الروابط)
+    ====================================================== -->
+
+    <script src="js/navigation.js"></script>
+
+
+    <!-- =====================================================
+         8 — FOLDER (تعريف renderFolder)
+         ⚠️ يجب أن يكون قبل disks.js
+    ====================================================== -->
+
+    <script src="js/folder.js"></script>
+
+
+    <!-- =====================================================
+         9 — MOVIE (تعريف renderMovie)
+         ⚠️ يجب أن يكون قبل disks.js
+    ====================================================== -->
+
+    <script src="js/movie.js"></script>
+
+
+    <!-- =====================================================
+         10 — SEARCH
+    ====================================================== -->
+
+    <!-- =====================================================
+         10 — DISKS (يستخدم renderFolder و renderMovie)
+         ⚠️ يجب أن يكون بعد folder.js و movie.js
+    ====================================================== -->
+
+    <script src="js/disks.js"></script>
+
+
+    <!-- =====================================================
+         11 — SEARCH
+         ⚠️ بعد disks.js حتى تكون دالة البحث النهائية هي المستخدمة
+    ====================================================== -->
+
+    <script src="js/search.js"></script>
+
+
+        <!-- =====================================================
+            12 — ASSISTANT
+        ====================================================== -->
+
+        <script src="js/assistant.js"></script>
+
+
+    <!-- =====================================================
+         12 — HERO
+    ====================================================== -->
+
+    <script src="js/hero.js"></script>
+
+
+    <!-- =====================================================
+         13 — APP
+         يجب أن يكون بعد كل الملفات السابقة
+    ====================================================== -->
+
+    <script src="js/app.js"></script>
+
+
+    <!-- =====================================================
+         فحص نهائي
+    ====================================================== -->
+
+    <script>
+
+        (function () {
+
+            'use strict';
+
+
+            function venomFinalCheck() {
+
+                console.log(
+                    '========================================'
+                );
+
+                console.log(
+                    '🚀 VENOM NET — الفحص النهائي'
+                );
+
+                console.log(
+                    '========================================'
+                );
+
+
+                console.log(
+                    'renderSettings:',
+                    typeof window.renderSettings
+                );
+
+
+                console.log(
+                    'loadVenomSettings:',
+                    typeof window.loadVenomSettings
+                );
+
+
+                console.log(
+                    'applyVenomSettings:',
+                    typeof window.applyVenomSettings
+                );
+
+
+                console.log(
+                    'renderNavBar:',
+                    typeof window.renderNavBar
+                );
+
+
+                console.log(
+                    'renderHomeView:',
+                    typeof window.renderHomeView
+                );
+
+
+                console.log(
+                    'fetchList:',
+                    typeof window.fetchList
+                );
+
+
+                console.log(
+                    'searchAllDisks:',
+                    typeof window.searchAllDisks
+                );
+
+
+                // تحقق من دوال المجلدات والفيديوهات
+                console.log(
+                    'renderFolder:',
+                    typeof window.renderFolder
+                );
+
+                console.log(
+                    'renderMovie:',
+                    typeof window.renderMovie
+                );
+
+
+                console.log(
+                    '========================================'
+                );
+
+
+                if (
+                    typeof window.renderSettings ===
+                    'function'
+                ) {
+
+                    console.log(
+                        '✅ settings.js يعمل بشكل صحيح'
+                    );
+
+                }
+                else {
+
+                    console.error(
+                        '❌ renderSettings غير موجودة'
+                    );
+
+                    console.error(
+                        '❌ تحقق من js/settings.js'
+                    );
+
+                }
+
+
+                if (
+                    typeof window.renderHomeView ===
+                    'function'
+                ) {
+
+                    console.log(
+                        '✅ الصفحة الرئيسية جاهزة'
+                    );
+
+                }
+
+
+                if (
+                    typeof window.fetchList ===
+                    'function'
+                ) {
+
+                    console.log(
+                        '✅ API جاهز'
+                    );
+
+                }
+
+
+                if (
+                    typeof window.renderFolder ===
+                    'function' &&
+                    typeof window.renderMovie ===
+                    'function'
+                ) {
+
+                    console.log(
+                        '✅ folder.js و movie.js جاهزان'
+                    );
+
+                }
+                else {
+
+                    console.error(
+                        '❌ renderFolder أو renderMovie غير موجودة'
+                    );
+
+                    console.error(
+                        '❌ تأكد من تحميل folder.js و movie.js قبل disks.js'
+                    );
+
+                }
+
+
+                console.log(
+                    '========================================'
+                );
+
+            }
+
+
+            if (
+                document.readyState ===
+                'loading'
+            ) {
+
+                document.addEventListener(
+                    'DOMContentLoaded',
+                    venomFinalCheck,
+                    {
+                        once: true
+                    }
+                );
+
+            }
+            else {
+
+                venomFinalCheck();
+
+            }
+
+        })();
+
+    </script>
+
+
+</body>
+
+</html>

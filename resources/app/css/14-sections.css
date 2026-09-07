@@ -1,0 +1,123 @@
+/* ============================================================
+   VENOM NET — SECTIONS
+   ============================================================ */
+
+.section {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.sectionHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+    padding: 0 0 0 2px;
+
+    border: 0;
+}
+
+.sectionHead h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0;
+
+    color: var(--text-primary, #fff);
+    font-size: 24px;
+    font-weight: 850;
+    line-height: 1.3;
+}
+
+.sectionHead h2::before {
+    content: '';
+    width: 4px;
+    height: 25px;
+
+    display: inline-block;
+    border-radius: 999px;
+
+    background: #fff;
+    box-shadow: 0 0 18px rgba(255,255,255,.16);
+}
+
+.sectionHead small {
+    color: var(--text-secondary, #c2c5cc);
+    background: rgba(255,255,255,.055);
+
+    padding: 6px 11px;
+
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 999px;
+
+    font-size: 12px;
+}
+
+@media (max-width: 700px) {
+    .section {
+        margin-top: 24px;
+    }
+
+    .sectionHead {
+        margin-bottom: 14px;
+    }
+
+    .sectionHead h2 {
+        font-size: 20px;
+    }
+
+    .sectionHead h2::before {
+        height: 21px;
+        width: 3px;
+    }
+}
+
+/* cinematic section rhythm */
+#mainContent{position:relative!important;z-index:5!important;margin-top:0!important;padding-top:0!important;background:linear-gradient(180deg,transparent 0,transparent 260px,rgba(9,11,16,.22) 340px,#0b0e14 460px,#0b0e14 100%)!important;}
+.section{margin-top:24px!important;}
+.section{padding-top:20px!important;}
+.sectionHead{margin-bottom:20px!important;}
+.sectionHead h2::before{background:linear-gradient(180deg,var(--accent),var(--accent-2))!important;box-shadow:0 0 18px rgba(123,97,255,.28)!important;}
+
+/* No section counters in the UI. */
+.sectionHead > small{display:none!important;}
+
+
+/* ============================================================
+   v19 — عنوان القسم تحت الهيدر وعلى اليمين
+   ============================================================ */
+#main {
+    padding-top: 80px !important;
+    box-sizing: border-box !important;
+}
+
+#main .section:first-child {
+    margin-top: 0 !important;
+}
+
+#main .sectionHead {
+    direction: rtl !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    margin-bottom: 18px !important;
+}
+
+#main .sectionHead h2 {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+    text-align: right !important;
+}
+
+@media (max-width: 760px) {
+    #main {
+        padding-top: 64px !important;
+    }
+
+    #mainContent {
+        margin-top: 0 !important;
+        background: linear-gradient(180deg, transparent 0, transparent 150px, rgba(9,11,16,.28) 220px, #0b0e14 320px, #0b0e14 100%) !important;
+        padding-top: 14px !important;
+    }
+}

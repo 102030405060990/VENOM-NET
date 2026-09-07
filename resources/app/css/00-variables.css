@@ -1,0 +1,9 @@
+/* VENOM NET — cinematic dark interface (Shahid-inspired) */
+:root{
+ --bg:#090b10;--bg-deep:#050609;--surface:#101319;--surface-2:#171b22;
+ --text:#f8f9fb;--text-primary:#fff;--text-secondary:#b9bec8;--muted:#7f8795;
+ --accent:#7b61ff;--accent-2:#18d8a4;--accent-soft:rgba(123,97,255,.18);
+ --border:rgba(255,255,255,.09);--border-strong:rgba(255,255,255,.16);
+ --bg-card:#141820;--bg-card-hover:#1a202a;
+ --radius-sm:10px;--radius-md:16px;--radius-lg:24px;--header-height:80px;
+}

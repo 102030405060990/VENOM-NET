@@ -1,0 +1,41 @@
+.episodes-container {
+    margin-top: 20px;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+}
+.episodes-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 9px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 7px;
+}
+.episodes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-left: 5px;
+}
+.episode-btn {
+    background: #1e2530;
+    border: none;
+    color: #fff;
+    min-width: 34px;
+    padding: 7px 11px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s;
+}
+.episode-btn:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 10px var(--glow);
+}

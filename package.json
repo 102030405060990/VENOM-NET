@@ -1,0 +1,17 @@
+{
+  "name": "venom-net-installer",
+  "version": "1.0.0",
+  "description": "VENOM NET desktop installer",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check-project.js",
+    "start": "node resources/app/server.js",
+    "dev": "node --watch resources/app/server.js"
+  },
+  "build": {
+    "productName": "VENOM NET",
+    "appId": "com.venomnet.desktop",
+    "artifactName": "VENOM NET Setup.${ext}",
+    "electronVersion": "36.9.5"
+  }
+}

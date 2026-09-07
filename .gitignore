@@ -1,0 +1,22 @@
+# Dependencies and generated output
+node_modules/
+resources/app/node_modules/
+dist/
+
+# Local runtime data
+resources/app/uploads/
+resources/app/data/ads.json
+resources/app/data/disks.json
+
+# Local secrets and editor files
+.env
+.env.*
+.idea/
+.vscode/
+
+# Packaged desktop binaries
+*.exe
+*.dll
+*.pak
+*.bin
+locales/

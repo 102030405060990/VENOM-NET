@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إعدادات VENOM NET</title>
+    <style>
+:root{
+    --bg:#080d15;
+    --panel:#111925;
+    --panel2:#172232;
+    --panel3:#233247;
+    --line:rgba(170,204,230,.14);
+    --text:#f5f8fb;
+    --muted:#9eafc0;
+    --accent:#ff3046;
+    --green:#35d99a;
+    --blue:#65c8ff;
+    --danger:#ff6e78;
+    --shadow:0 24px 80px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  direction:rtl;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+    background-color:var(--bg);
+    background-image:
+        linear-gradient(rgba(126,171,205,.028) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(126,171,205,.028) 1px,transparent 1px),
+        radial-gradient(ellipse at 8% 0%,rgba(255,48,70,.17),transparent 27%),
+        radial-gradient(ellipse at 92% 18%,rgba(58,194,255,.14),transparent 30%),
+        linear-gradient(135deg,#080b12 0%,#111a29 48%,#080b12 100%);
+    background-size:42px 42px,42px 42px,auto,auto,auto;
+  color:var(--text);
+  min-height:100vh;
+    padding:18px clamp(14px,2.5vw,36px) 36px;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 24%)}
+.settings-shell{width:100%;max-width:none;margin:0 auto}
+.topbar{
+  position:sticky;top:10px;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+    background:rgba(13,22,34,.78);backdrop-filter:blur(22px);
+  border:1px solid var(--line);border-radius:22px;padding:16px 18px;
+    box-shadow:var(--shadow);margin-bottom:22px;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#ff6675,#e50914 55%,#43d7ff);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 10px 30px rgba(229,9,20,.3)}
+.brand h1{font-size:20px;line-height:1.15;font-weight:900;white-space:nowrap}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:10px 15px;cursor:pointer;font-weight:800;font-size:13px;transition:.18s transform,.18s opacity,.18s background;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{cursor:not-allowed;opacity:.45;transform:none}
+.btn-warning{background:var(--accent);color:#161616}.btn-success{background:var(--green);color:#0b1510}.btn-primary{background:var(--blue);color:#08111d}.btn-danger{background:var(--danger);color:#fff}.btn-back{background:#242938;color:#fff;border:1px solid var(--line)}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:22px;align-items:start}
+.sidebar{position:sticky;top:92px;z-index:20;background:rgba(14,25,39,.86);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:var(--shadow)}
+.side-label{padding:8px 10px;color:#6f7684;font-size:11px;font-weight:900;letter-spacing:.08em}
+.side-link{width:100%;border:1px solid transparent;background:transparent;color:#d9dde5;border-radius:11px;padding:12px;text-align:right;cursor:pointer;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.side-link:hover{background:linear-gradient(90deg,rgba(229,9,20,.2),rgba(58,194,255,.1));border-color:rgba(229,9,20,.35);color:#fff}
+.content{min-width:0;width:100%}
+.content > .section{width:100%}
+.section.collapsed > :not(.section-head){display:none}
+.section-head{cursor:pointer;user-select:none}
+.section.collapsed{padding-bottom:16px}
+.hero-card{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(36,20,31,.98),rgba(13,21,33,.96) 58%,rgba(10,39,54,.95));border:1px solid rgba(255,72,89,.28);border-radius:24px;padding:30px;box-shadow:var(--shadow);margin-bottom:20px}
+.hero-card:after{content:"";position:absolute;inset:auto -8% -65% 30%;height:230px;background:radial-gradient(ellipse,rgba(229,9,20,.2),transparent 68%);pointer-events:none}
+.hero-card h2{font-size:25px;font-weight:900;margin-bottom:8px}.hero-card p{color:var(--muted);font-size:13px;line-height:1.8;max-width:850px}
+.stat-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:18px}
+.stat{position:relative;background:rgba(7,14,23,.66);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035);overflow:hidden}.stat:before{content:"";position:absolute;right:0;top:0;width:3px;height:100%;background:linear-gradient(var(--accent),var(--blue));box-shadow:0 0 12px rgba(255,48,70,.35)}.stat .label{font-size:11px;color:var(--muted);margin-bottom:8px}.stat .value{font-size:22px;font-weight:900;color:#fff}
+.section{background:rgba(14,24,37,.86);border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:18px;box-shadow:0 16px 50px rgba(0,0,0,.2);scroll-margin-top:105px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.section-title{color:#fff;font-size:18px;font-weight:900;display:flex;align-items:center;gap:9px}.section-title:before{content:"";width:4px;height:22px;border-radius:4px;background:linear-gradient(var(--accent),var(--blue));box-shadow:0 0 16px rgba(255,48,70,.5)}.section-title span{display:inline-grid;place-items:center;min-width:26px;height:24px;padding:0 8px;border-radius:999px;background:#282d39;color:var(--accent);font-size:11px}
+.section-note{color:var(--muted);font-size:12px;line-height:1.7;margin:-3px 0 14px}
+.list{display:flex;flex-direction:column;gap:9px}.disk-item,.ad-item{background:#151821;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.disk-item:hover,.ad-item:hover{background:#191d27;border-color:rgba(255,255,255,.13)}
+.disk-item .info,.ad-item .info{min-width:0;flex:1}.disk-item .name{font-weight:850;font-size:14px}.disk-item .path{font-size:11px;color:var(--muted);direction:ltr;unicode-bidi:plaintext;word-break:break-all;margin-top:5px}
+.ad-item{align-items:center}.ad-item .preview,.ad-item video{width:78px;height:54px;object-fit:cover;border-radius:10px;background:#0c0f15;border:1px solid var(--line)}.ad-main{display:flex;align-items:center;gap:12px;min-width:0;flex:1}.ad-main .url,.ad-item .url{font-size:11px;color:#8dbfff;direction:ltr;word-break:break-all;margin-top:4px}.ad-main .broken{color:#ff8f94;font-size:11px;margin-top:4px}
+.form-row{display:grid;grid-template-columns:1fr 1.6fr auto;gap:9px;margin-top:13px}.form-row input{min-width:0;width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:#0e1118;color:#fff;outline:none}.form-row input:focus{border-color:rgba(255,212,59,.65);box-shadow:0 0 0 3px rgba(255,212,59,.08)}
+.cache-card{background:linear-gradient(145deg,#171b22,#10141b);border:1px solid rgba(42,209,123,.22);border-radius:17px;padding:16px}.cache-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.cache-title{font-size:16px;font-weight:900}.cache-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-top:6px;max-width:850px}.cache-state{font-size:12px;color:#94dfff;white-space:nowrap}.progress-wrap{height:9px;background:#0c0f14;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:14px}.progress{height:100%;width:0;background:linear-gradient(90deg,#2ad17b,#74efb1);transition:width .25s ease}.cache-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.cache-stats{margin-top:11px;color:#7f8795;font-size:11px}
+.actions-bar{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;padding-top:4px}.footer-note{text-align:center;color:#616978;font-size:11px;padding:18px 0}
+.empty-msg{color:#697180;text-align:center;padding:24px;border:1px dashed var(--line);border-radius:14px;background:#0e1117;font-size:12px}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:11px;background:rgba(42,209,123,.13);color:#75e7ad;border:1px solid rgba(42,209,123,.2)}
+.status-badge.off{background:rgba(255,93,99,.1);color:#ff9a9f;border-color:rgba(255,93,99,.18)}
+.server-address-card{margin-top:16px;background:#0f1219;border:1px solid rgba(255,212,59,.18);border-radius:16px;padding:15px}
+.server-address-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.server-address-title{font-weight:900;font-size:14px}.server-address-help{font-size:11px;color:var(--muted);line-height:1.7}
+.server-address-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:9px;align-items:center}
+.server-address-row input{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:#0c0f15;color:#fff;direction:ltr;text-align:left;outline:none}
+.server-address-row input:focus{border-color:rgba(255,212,59,.65);box-shadow:0 0 0 3px rgba(255,212,59,.08)}
+.server-address-current{font-size:11px;color:#8dbfff;direction:ltr;word-break:break-all;margin-top:8px}
+.cinematic-settings{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,212,59,.08),rgba(77,163,255,.04) 45%,rgba(17,19,27,.96));}
+.settings-options-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.option-card{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:78px;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(7,15,25,.54);transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.option-card:hover{background:rgba(40,25,37,.78);border-color:rgba(255,48,70,.38);transform:translateY(-2px)}
+.option-copy{display:flex;flex-direction:column;gap:5px;min-width:0}.option-copy strong{font-size:13px}.option-copy small{color:var(--muted);font-size:11px;line-height:1.5}
+.option-control{min-width:145px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#0e1118;color:#fff}.option-toggle input{width:19px;height:19px;accent-color:var(--accent);flex-shrink:0}
+@media(max-width:1000px){.settings-options-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.settings-options-grid{grid-template-columns:1fr}.option-control{min-width:125px}}
+@media(max-width:680px){.server-address-row{grid-template-columns:1fr}.server-address-row .btn{width:100%}}
+
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:6px;padding:8px}.side-label{display:none}.side-link{min-width:max-content;text-align:center;justify-content:center}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){body{padding:10px}.topbar{top:6px;border-radius:16px;padding:12px}.brand h1{font-size:16px}.hero-card h2{font-size:21px}.section{padding:14px}.stat-grid{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.disk-item,.ad-item{align-items:flex-start;flex-direction:column}.ad-main{width:100%}.actions-bar{justify-content:stretch}.actions-bar .btn{flex:1}}
+
+.explorer-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:#0e1118;color:#fff;cursor:pointer;text-align:right}
+.explorer-trigger:hover{border-color:rgba(255,212,59,.45);background:#121722}
+.explorer-trigger .muted{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.field-stack{display:grid;gap:8px;min-width:0}
+.field-label{font-size:11px;color:var(--muted);font-weight:800}
+.selection-preview{display:none;width:52px;height:52px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#0b0e14}
+.selection-preview.show{display:block}
+#venomExplorerOverlay{position:fixed;inset:0;z-index:100000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);padding:18px}
+#venomExplorerOverlay.open{display:flex}
+#venomExplorer{width:min(1080px,96vw);height:min(760px,92vh);background:linear-gradient(145deg,#141822,#0e1118);border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:0 30px 110px rgba(0,0,0,.58);overflow:hidden;display:flex;flex-direction:column;color:#fff}
+.ex-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.ex-title{font-size:18px;font-weight:900}.ex-close{border:0;background:#252b38;color:#fff;width:40px;height:40px;border-radius:12px;font-size:20px;cursor:pointer}
+.ex-toolbar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.ex-path{flex:1;min-width:0;background:#0a0d13;color:#dbe1ea;border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:12px;direction:ltr;outline:none}
+.ex-btn{border:0;border-radius:11px;padding:10px 13px;font-weight:800;cursor:pointer;background:#252b38;color:#fff}.ex-btn.primary{background:var(--accent);color:#161616}.ex-btn.blue{background:var(--blue);color:#08111d}
+.ex-body{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0;flex:1}
+.ex-roots,.ex-items{min-height:0;overflow:auto;padding:12px}.ex-roots{border-left:1px solid var(--line);background:rgba(255,255,255,.018)}
+.ex-item{width:100%;display:flex;align-items:center;gap:10px;border:1px solid transparent;background:transparent;color:#fff;border-radius:12px;padding:11px 12px;cursor:pointer;text-align:right;margin-bottom:6px}
+.ex-item:hover{background:#1b202a;border-color:var(--line)}.ex-item.selected{background:rgba(255,212,59,.12);border-color:rgba(255,212,59,.35)}
+.ex-icon{width:28px;font-size:20px;text-align:center;flex:0 0 auto}.ex-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ex-kind{font-size:10px;color:var(--muted);margin-top:2px}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px}.ex-card{min-height:82px;background:#121620;border:1px solid var(--line);border-radius:14px;padding:11px;cursor:pointer;text-align:right}.ex-card:hover{background:#191e29;border-color:rgba(255,255,255,.14)}.ex-card.selected{outline:2px solid rgba(255,212,59,.5)}
+.ex-thumb{width:100%;height:92px;border-radius:10px;object-fit:cover;background:#0b0f15;margin-bottom:7px}.ex-empty{height:100%;display:grid;place-items:center;color:var(--muted);text-align:center;padding:40px}
+.ex-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line)}
+@media(max-width:760px){#venomExplorer{height:94vh}.ex-body{grid-template-columns:1fr}.ex-roots{border-left:0;border-bottom:1px solid var(--line);max-height:150px}.ex-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}}
+</style>
+</head>
+<body>
+<script>
+    /* =====================================================
+    MAVYRA - واجهة حوار داخلية بدون رسائل المتصفح
+    ====================================================== */
+    const dialogStyle = document.createElement('style');
+    dialogStyle.textContent = `
+      #venomDialogOverlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);padding:20px;}
+      #venomDialog{width:min(520px,100%);background:linear-gradient(180deg,#171a24,#10121a);border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:0 30px 100px rgba(0,0,0,.6);overflow:hidden;color:#fff;direction:rtl;}
+      #venomDialog .vd-head{padding:22px 22px 8px;font-size:20px;font-weight:800;}
+      #venomDialog .vd-msg{padding:8px 22px 22px;color:#cbd0da;line-height:1.8;font-size:14px;white-space:pre-wrap;}
+      #venomDialog .vd-actions{display:flex;gap:10px;justify-content:flex-start;padding:0 22px 22px;}
+      #venomDialog button{border:0;border-radius:12px;padding:11px 20px;font-weight:800;cursor:pointer;font-family:inherit;}
+      #venomDialog .vd-ok{background:#2ad17b;color:#07140d;}
+      #venomDialog .vd-cancel{background:#2a2f3b;color:#fff;}
+      #venomToast{position:fixed;right:22px;bottom:22px;z-index:100000;display:none;max-width:min(420px,calc(100vw - 44px));background:#171a24;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:13px 16px;box-shadow:0 18px 55px rgba(0,0,0,.45);font-size:14px;}
+    `;
+    document.head.appendChild(dialogStyle);
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="venomDialogOverlay">
+        <div id="venomDialog" role="dialog" aria-modal="true">
+          <div class="vd-head" id="venomDialogTitle">VEXA</div>
+          <div class="vd-msg" id="venomDialogMessage"></div>
+          <div class="vd-actions">
+            <button class="vd-cancel" id="venomDialogCancel">إلغاء</button>
+            <button class="vd-ok" id="venomDialogOk">حسنًا</button>
+          </div>
+        </div>
+      </div>
+      <div id="venomToast"></div>
+    `);
+
+    function showSettingsToast(message){
+      const el=document.getElementById('venomToast');
+      if(!el) return;
+      el.textContent=String(message||'');
+      el.style.display='block';
+      clearTimeout(window.__venomToastTimer);
+      window.__venomToastTimer=setTimeout(()=>{el.style.display='none';},2600);
+    }
+
+    function askUser(message, onConfirm){
+      openSettingsConfirm(message).then(ok=>{ if(ok && typeof onConfirm==='function') onConfirm(); });
+    }
+
+    function askUserAsync(message){ return openSettingsConfirm(message); }
+
+    function openSettingsConfirm(message){
+      return new Promise(resolve=>{
+        const overlay=document.getElementById('venomDialogOverlay');
+        const ok=document.getElementById('venomDialogOk');
+        const cancel=document.getElementById('venomDialogCancel');
+        const msg=document.getElementById('venomDialogMessage');
+        if(!overlay||!ok||!cancel||!msg){ resolve(true); return; }
+        msg.textContent=String(message||'');
+        overlay.style.display='flex';
+        const close=(value)=>{
+          overlay.style.display='none';
+          ok.onclick=null; cancel.onclick=null; overlay.onclick=null;
+          resolve(value);
+        };
+        ok.onclick=()=>close(true);
+        cancel.onclick=()=>close(false);
+        overlay.onclick=(e)=>{ if(e.target===overlay) close(false); };
+        setTimeout(()=>ok.focus(),0);
+      });
+    }
+
+    // منع أي alert/confirm أصلي من الظهور داخل صفحة الإعدادات
+    window.alert=(message)=>showSettingsToast(message);
+    window.confirm=(message)=>{ openSettingsConfirm(message); return false; };
+</script>
+
+<div class="settings-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">⚙️</div>
+    <div><h1>إعدادات VENOM NET</h1><small>إدارة المكتبة والخادم والكاش من مكان واحد</small></div>
+    </div>
+    <div class="top-actions">
+      <span class="status-badge" id="serverStatus">● متصل</span>
+      <button class="btn btn-back" onclick="window.history.back()">↩ رجوع</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-label">الأقسام</div>
+            <button class="side-link" onclick="openSettingsSection('overviewSection')">نظرة عامة <span>⌂</span></button>
+            <button class="side-link" onclick="openSettingsSection('appearanceSection')">التجربة السينمائية <span>🎞️</span></button>
+            <button class="side-link" onclick="openSettingsSection('interfaceSection')">الواجهة العامة <span>🎨</span></button>
+            <button class="side-link" onclick="openSettingsSection('metadataSection')">بيانات الأفلام <span>🎬</span></button>
+            <button class="side-link" onclick="openSettingsSection('disksSection')">الأقراص <span>💾</span></button>
+            <button class="side-link" onclick="openSettingsSection('adsSection')">الإعلانات <span>📢</span></button>
+            <button class="side-link" onclick="openSettingsSection('fullCacheSection')">الكاش الدائم <span>⚡</span></button>
+    </aside>
+
+    <main class="content">
+      <section class="hero-card" id="overviewSection">
+        <h2>لوحة التحكم</h2>
+        <p>واجهة إعدادات جديدة بنفس روح منصات البث الحديثة: بطاقات واضحة، ألوان داكنة، وتنظيم أسرع للوصول إلى الأقراص والإعلانات والكاش.</p>
+        <div class="stat-grid">
+          <div class="stat"><div class="label">عنوان الخادم</div><div class="value" id="serverUrl">-</div></div>
+          <div class="stat"><div class="label">FFmpeg</div><div class="value" id="ffmpegStatus">✅</div></div>
+          <div class="stat"><div class="label">الأقراص</div><div class="value" id="diskCount">0</div></div>
+          <div class="stat"><div class="label">الإعلانات</div><div class="value" id="adCount">0</div></div>
+          <div class="stat"><div class="label">الكاش</div><div class="value">دائم</div></div>
+        </div>
+        <div class="server-address-card">
+          <div class="server-address-head">
+            <div>
+              <div class="server-address-title">🌐 عنوان السيرفر</div>
+              <div class="server-address-help">اكتب IP السيرفر مع المنفذ. بعد الحفظ ستستخدم الصفحة الرئيسية والإعدادات هذا العنوان.</div>
+            </div>
+          </div>
+          <div class="server-address-row">
+            <input id="serverAddressInput" type="text" inputmode="url" placeholder="192.168.0.81:8081" autocomplete="off" />
+            <button class="btn btn-success" type="button" onclick="saveServerAddressFromSettings()">💾 حفظ العنوان</button>
+            <button class="btn btn-back" type="button" onclick="useCurrentServerAddress()">↺ الحالي</button>
+          </div>
+          <div class="server-address-current">العنوان المستخدم الآن: <span id="serverAddressCurrent">-</span></div>
+                    <div class="server-address-card">
+                        <div class="server-address-head">
+                            <div>
+                                <div class="server-address-title">✏️ اسم المنصة</div>
+                                <div class="server-address-help">غيّر الاسم الذي يظهر في عنوان التطبيق وشاشة البداية.</div>
+                            </div>
+                        </div>
+                        <div class="server-address-row">
+                            <input id="siteNameInput" type="text" placeholder="VEXA" autocomplete="off" />
+                            <button class="btn btn-success" type="button" onclick="saveSiteNameFromSettings()">💾 حفظ الاسم</button>
+                        </div>
+                    </div>
+        </div>
+      </section>
+
+            <section class="section cinematic-settings" id="appearanceSection">
+                <div class="section-head"><div class="section-title">🎞️ إعدادات التجربة السينمائية</div></div>
+                <div class="section-note">خصص شكل VEXA وطريقة تشغيل الأفلام.</div>
+                <div class="settings-options-grid">
+                    <div class="option-card"><div class="option-copy"><strong>لون الواجهة</strong><small>لون الأزرار والعناصر الرئيسية.</small></div><select id="cinemaAccent" class="option-control"><option value="#ffd43b">ذهبي سينمائي</option><option value="#18d8a4">أخضر نيون</option><option value="#4da3ff">أزرق مستقبلي</option><option value="#ff6675">أحمر درامي</option></select></div>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>الخلفية السينمائية</strong><small>عرض بوستر الفيلم في الخلفية.</small></span><input id="cinemaBackground" type="checkbox" checked /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>التشغيل التلقائي</strong><small>تشغيل الفيديو تلقائيا.</small></span><input id="cinemaAutoplay" type="checkbox" checked /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>حفظ مكان المشاهدة</strong><small>تذكر آخر موضع في الفيديو.</small></span><input id="cinemaRemember" type="checkbox" checked /></label>
+                </div>
+                <div class="actions-bar" style="margin-top:14px;justify-content:flex-start;"><button class="btn btn-warning" type="button" onclick="saveCinemaSettings()">💾 حفظ إعدادات التجربة</button></div>
+            </section>
+
+            <section class="section" id="interfaceSection">
+                <div class="section-head"><div class="section-title">🎨 إعدادات الواجهة العامة</div></div>
+                <div class="section-note">إعدادات شاشة البداية والألوان والهيدر والبانر والبطاقات في نفس المكان.</div>
+                <div class="settings-options-grid">
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>شاشة البداية</strong><small>إظهار شاشة التحميل عند فتح التطبيق.</small></span><input id="frontSplashEnabled" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>الهيدر</strong><small>إظهار شريط التنقل العلوي.</small></span><input id="frontHeaderEnabled" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>البحث</strong><small>إظهار مربع البحث في الهيدر.</small></span><input id="frontHeaderSearch" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>البانر الرئيسي</strong><small>إظهار البانر السينمائي.</small></span><input id="frontHeroEnabled" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>نقاط البانر</strong><small>إظهار نقاط التنقل في البانر.</small></span><input id="frontHeroDots" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>ظل البطاقات</strong><small>إظهار الظلال حول بطاقات المحتوى.</small></span><input id="frontCardShadow" type="checkbox" /></label>
+                    <label class="option-card option-toggle"><span class="option-copy"><strong>حركة البطاقات</strong><small>تفعيل تأثير الحركة عند المرور.</small></span><input id="frontCardHover" type="checkbox" /></label>
+                    <div class="option-card"><span class="option-copy"><strong>لون الواجهة</strong><small>اللون الرئيسي للأزرار والعناصر.</small></span><input id="frontAccent" class="option-control" type="color" /></div>
+                    <div class="option-card"><span class="option-copy"><strong>لون الخلفية</strong><small>الخلفية العامة للتطبيق.</small></span><input id="frontBackground" class="option-control" type="color" /></div>
+                    <div class="option-card"><span class="option-copy"><strong>حواف البطاقات</strong><small>نصف قطر بطاقات المحتوى.</small></span><input id="frontCardRadius" class="option-control" type="number" min="0" max="40" /></div>
+                </div>
+                <div class="actions-bar" style="margin-top:14px;justify-content:flex-start;"><button class="btn btn-warning" type="button" onclick="saveInterfaceSettings()">💾 حفظ إعدادات الواجهة</button></div>
+            </section>
+
+            <section class="section" id="metadataSection">
+                <div class="section-head"><div class="section-title">🎬 بيانات الأفلام والتقييمات</div></div>
+                <div class="section-note">اربط إحدى المنصتين لجلب التقييم والملخص والسنة والنوع، ثم تُحفظ البيانات تلقائيًا في الكاش الدائم.</div>
+                <div class="form-row" style="grid-template-columns:180px minmax(0,1fr) auto;align-items:end;">
+                    <div class="field-stack">
+                        <div class="field-label">المنصة</div>
+                        <select id="metadataProvider" style="width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:#0e1118;color:#fff;outline:none;">
+                            <option value="gemini">Gemini AI</option>
+                        </select>
+                    </div>
+                    <div class="field-stack">
+                        <div class="field-label">مفتاح API</div>
+                        <input id="metadataApiKey" type="password" placeholder="أدخل مفتاح المنصة هنا" autocomplete="off" />
+                    </div>
+                    <button class="btn btn-success" type="button" onclick="saveMetadataProvider()">💾 حفظ المفتاح</button>
+                </div>
+                <div class="server-address-current" id="metadataProviderStatus">لم يتم حفظ مفتاح بعد</div>
+            </section>
+
+      <section class="section" id="disksSection">
+                <div class="section-head">
+                    <div class="section-title">💾 إدارة الأقراص <span id="diskCountBadge">0</span></div>
+                    <button class="btn btn-danger" type="button" onclick="removeAllDisks()">🗑️ حذف جميع الأقراص</button>
+                </div>
+        <div class="section-note">أضف أو احذف مصادر المكتبة التي تظهر في الصفحة الرئيسية.</div>
+        <div id="disksList" class="list"><div class="empty-msg">جاري تحميل الأقراص...</div></div>
+        <div class="form-row" style="grid-template-columns:1fr 1.5fr 1fr auto;align-items:end;">
+                <div class="field-stack">
+                    <div class="field-label">اسم القسم</div>
+                    <input type="text" id="newDiskName" placeholder="مثال: الأفلام الإسبانية" />
+                </div>
+                <div class="field-stack">
+                    <div class="field-label">مسار القسم</div>
+                        <div style="display:flex;gap:8px;align-items:stretch;">
+                            <button type="button" class="explorer-trigger" style="flex:1;" onclick="openExplorer('folder','diskPath')">
+                                <span>🌐 مستكشف الشبكة</span><span class="muted" id="newDiskPath">لم يتم اختيار مسار</span>
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="chooseLocalDiskFolder()">💻 محلي</button>
+                        </div>
+                </div>
+                <div class="field-stack">
+                    <div class="field-label">صورة القسم (اختيارية)</div>
+                    <div style="display:flex;gap:8px;align-items:stretch;">
+                        <button type="button" class="explorer-trigger" style="flex:1;" onclick="openExplorer('image','diskImage')">
+                            <span>🌐 من الشبكة</span><span class="muted" id="newDiskImageText">لم يتم اختيار صورة</span>
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="chooseLocalDiskImage()">💻 محلية</button>
+                    </div>
+                </div>
+                <img id="diskImagePreview" class="selection-preview" alt="معاينة" />
+                <button class="btn btn-success" onclick="addDisk()">➕ إضافة قسم</button>
+            </div>
+      </section>
+
+      <section class="section" id="adsSection">
+        <div class="section-head"><div class="section-title">📢 إدارة الإعلانات <span id="adCountBadge">0</span></div></div>
+        <div class="section-note">ارفع صورة أو فيديو للإعلان. الملفات المحلية المعطوبة سيتم تجاهلها بدل ظهور أخطاء 404 في الصفحة.</div>
+        <div id="adsList" class="list"><div class="empty-msg">جاري تحميل الإعلانات...</div></div>
+        <div class="form-row" style="grid-template-columns:1.2fr 1fr 1fr auto;align-items:end;">
+                <div class="field-stack">
+                    <div class="field-label">رابط الإعلان (اختياري)</div>
+                    <input type="text" id="newAdLink" placeholder="https://..." />
+                </div>
+                <div class="field-stack">
+                    <div class="field-label">ملف الإعلان</div>
+                    <div style="display:flex;gap:8px;align-items:stretch;">
+                        <button type="button" class="explorer-trigger" style="flex:1;" onclick="openExplorer('media','adFile')">
+                            <span>🌐 من الشبكة</span><span class="muted" id="newAdFileText">لم يتم اختيار ملف</span>
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="chooseLocalAdMedia()">💻 محلي</button>
+                    </div>
+                </div>
+                <img id="adImagePreview" class="selection-preview" alt="معاينة الإعلان" />
+                <div class="top-actions">
+                    <button class="btn btn-primary" onclick="uploadAd()">📤 إضافة الإعلان</button>
+                    <button class="btn btn-danger" onclick="resetAllAds()">🗑️ حذف الكل</button>
+                </div>
+            </div>
+        <div class="actions-bar" style="margin-top:10px">
+          <button class="btn btn-danger" onclick="resetAllAds()">🗑 حذف جميع الإعلانات</button>
+        </div>
+      </section>
+
+      <section class="section" id="fullCacheSection">
+        <div class="section-head"><div class="section-title">⚡ الكاش الدائم الكامل</div></div>
+        <div class="cache-card">
+          <div class="cache-top">
+            <div><div class="cache-title">نسخ كاش المكتبة بالكامل</div><div class="cache-desc">يفحص جميع الأقراص والأقسام والمجلدات الفرعية ويحفظ بيانات المجلدات والصور والبوسترات بشكل دائم على السيرفر لتسريع فتح المكتبة بعد ذلك.</div></div>
+            <div class="cache-state" id="fullCacheStatus">💾 جاهز</div>
+          </div>
+          <div class="progress-wrap"><div class="progress" id="fullCacheProgress"></div></div>
+          <div class="cache-actions">
+            <button class="btn btn-success" id="buildFullCacheBtn" onclick="buildFullLibraryCache()">⚡ بناء الكاش الكامل</button>
+            <button class="btn btn-primary" onclick="loadCacheStats()">📊 تحديث الإحصائيات</button>
+          </div>
+          <div class="cache-stats" id="cacheStats"></div>
+        </div>
+      </section>
+
+      <div class="actions-bar">
+        <button class="btn btn-warning" onclick="refreshAll()">🔄 تحديث الكل</button>
+        <button class="btn btn-danger" onclick="askUser('هل أنت متأكد من مسح الكاش الدائم؟', clearCache)">🧹 مسح الكاش</button>
+      </div>
+      <div class="footer-note">جميع إعدادات المكتبة محفوظة على الخادم.</div>
+    </main>
+  </div>
+</div>
+<script src="js/config.js"></script>
+<script>
+        function metadataStorageKey(provider) { return `venom_metadata_key_${provider}`; }
+        function loadMetadataProvider() {
+            const provider = 'gemini';
+            localStorage.setItem('venom_metadata_provider', provider);
+            const select = document.getElementById('metadataProvider');
+            const input = document.getElementById('metadataApiKey');
+            if (select) select.value = provider;
+            if (input) input.value = localStorage.getItem(metadataStorageKey(provider)) || '';
+            updateMetadataProviderStatus();
+        }
+        function updateMetadataProviderStatus() {
+            const provider = document.getElementById('metadataProvider')?.value || 'tmdb';
+            const saved = Boolean(localStorage.getItem(metadataStorageKey(provider)));
+            const status = document.getElementById('metadataProviderStatus');
+            if (status) status.textContent = saved ? `مفتاح ${provider.toUpperCase()} محفوظ` : 'لم يتم حفظ مفتاح لهذه المنصة';
+        }
+        function saveMetadataProvider() {
+            const provider = document.getElementById('metadataProvider')?.value || 'tmdb';
+            const input = document.getElementById('metadataApiKey');
+            const key = String(input?.value || '').trim();
+            if (!key) { showSettingsToast('أدخل مفتاح API أولًا'); return; }
+            localStorage.setItem('venom_metadata_provider', provider);
+            localStorage.setItem(metadataStorageKey(provider), key);
+            updateMetadataProviderStatus();
+            showSettingsToast('تم حفظ مفتاح البيانات');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('metadataProvider')?.addEventListener('change', loadMetadataProvider);
+            loadMetadataProvider();
+            loadSiteNameFromSettings();
+            loadCinemaSettings();
+            loadInterfaceSettings();
+            setupClassicSettings();
+        });
+
+        function openSettingsSection(id) {
+            const section = document.getElementById(id);
+            if (!section) return;
+            document.querySelectorAll('.content > .section').forEach(item => item.classList.add('collapsed'));
+            section.classList.remove('collapsed');
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function setupClassicSettings() {
+            const sections = document.querySelectorAll('.content > .section');
+            sections.forEach(section => {
+                section.classList.add('collapsed');
+                const head = section.querySelector(':scope > .section-head');
+                if (!head) return;
+                head.addEventListener('click', event => {
+                    if (event.target.closest('button')) return;
+                    const wasCollapsed = section.classList.contains('collapsed');
+                    sections.forEach(item => item.classList.add('collapsed'));
+                    if (wasCollapsed) section.classList.remove('collapsed');
+                });
+            });
+        }
+
+        // ============================================================
+        // عنوان السيرفر القابل للتعديل
+        // ============================================================
+        function settingsServerUrl() {
+            return (typeof getVenomSavedServerUrl === 'function')
+                ? getVenomSavedServerUrl()
+                : window.location.origin;
+        }
+
+        function serverApiUrl(endpoint) {
+            // صفحة الإعدادات تتصل بالسيرفر الذي فتحناها منه؛ بعد حفظ العنوان
+            // الجديد يتم الانتقال إليه، وبذلك نتجنب طلبات CORS بين عنوانين.
+            const base = window.location.origin.replace(/\/$/, '');
+            return endpoint.startsWith('/') ? `${base}${endpoint}` : `${base}/${endpoint}`;
+        }
+
+        async function serverFetch(endpoint, options) {
+            return fetch(serverApiUrl(endpoint), options);
+        }
+
+        function loadCinemaSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                const accentInput = document.getElementById('cinemaAccent');
+                if (accentInput) accentInput.value = settings.theme?.accent || '#ffd43b';
+                document.getElementById('cinemaBackground').checked = settings.hero?.enabled !== false;
+                document.getElementById('cinemaAutoplay').checked = settings.player?.autoplay !== false;
+                document.getElementById('cinemaRemember').checked = settings.player?.rememberPosition !== false;
+            } catch (_) {}
+        }
+
+        function saveCinemaSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                settings.theme = { ...(settings.theme || {}), accent: document.getElementById('cinemaAccent').value };
+                settings.hero = { ...(settings.hero || {}), enabled: document.getElementById('cinemaBackground').checked };
+                settings.player = { ...(settings.player || {}), autoplay: document.getElementById('cinemaAutoplay').checked, rememberPosition: document.getElementById('cinemaRemember').checked };
+                localStorage.setItem('venom_net_settings', JSON.stringify(settings));
+                document.documentElement.style.setProperty('--accent', settings.theme.accent);
+                showSettingsToast('✅ تم حفظ إعدادات التجربة السينمائية');
+            } catch (error) {
+                showSettingsToast('❌ تعذر حفظ الإعدادات: ' + error.message);
+            }
+        }
+
+        function loadInterfaceSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                document.getElementById('frontSplashEnabled').checked = settings.splash?.enabled !== false;
+                document.getElementById('frontHeaderEnabled').checked = settings.header?.enabled !== false;
+                document.getElementById('frontHeaderSearch').checked = settings.header?.search !== false;
+                document.getElementById('frontHeroEnabled').checked = settings.hero?.enabled !== false;
+                document.getElementById('frontHeroDots').checked = settings.hero?.dots !== false;
+                document.getElementById('frontCardShadow').checked = settings.cards?.shadow !== false;
+                document.getElementById('frontCardHover').checked = settings.cards?.hover !== false;
+                document.getElementById('frontAccent').value = settings.theme?.accent || '#ffffff';
+                document.getElementById('frontBackground').value = settings.theme?.background || '#090b10';
+                document.getElementById('frontCardRadius').value = Number(settings.cards?.radius ?? 16);
+            } catch (_) {}
+        }
+
+        function saveInterfaceSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                settings.splash = { ...(settings.splash || {}), enabled: document.getElementById('frontSplashEnabled').checked };
+                settings.header = { ...(settings.header || {}), enabled: document.getElementById('frontHeaderEnabled').checked, search: document.getElementById('frontHeaderSearch').checked };
+                settings.hero = { ...(settings.hero || {}), enabled: document.getElementById('frontHeroEnabled').checked, dots: document.getElementById('frontHeroDots').checked };
+                settings.cards = { ...(settings.cards || {}), shadow: document.getElementById('frontCardShadow').checked, hover: document.getElementById('frontCardHover').checked, radius: Number(document.getElementById('frontCardRadius').value) || 0 };
+                settings.theme = { ...(settings.theme || {}), accent: document.getElementById('frontAccent').value, background: document.getElementById('frontBackground').value };
+                localStorage.setItem('venom_net_settings', JSON.stringify(settings));
+                showSettingsToast('✅ تم حفظ إعدادات الواجهة');
+            } catch (error) {
+                showSettingsToast('❌ تعذر حفظ إعدادات الواجهة: ' + error.message);
+            }
+        }
+
+        function loadSiteNameFromSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                const input = document.getElementById('siteNameInput');
+                if (input) input.value = settings.siteName || 'MAVYRA';
+            } catch (_) {}
+        }
+
+        function saveSiteNameFromSettings() {
+            const input = document.getElementById('siteNameInput');
+            const siteName = String(input?.value || '').trim();
+            if (!siteName) {
+                showSettingsToast('⚠️ اكتب اسم المنصة أولًا');
+                return;
+            }
+            try {
+                const settings = JSON.parse(localStorage.getItem('venom_net_settings') || '{}');
+                settings.siteName = siteName;
+                localStorage.setItem('venom_net_settings', JSON.stringify(settings));
+                document.title = siteName;
+                showSettingsToast('✅ تم حفظ اسم المنصة');
+            } catch (error) {
+                showSettingsToast('❌ تعذر حفظ الاسم: ' + error.message);
+            }
+        }
+
+        function showSettingsToast(message) {
+            // استخدم نظام الصفحة إن كان موجوداً، وإلا نعرض رسالة داخل القسم.
+            const box = document.getElementById('serverAddressCurrent');
+            if (box) {
+                box.textContent = message;
+                box.dataset.tempMessage = '1';
+                clearTimeout(window.__venomAddressToastTimer);
+                window.__venomAddressToastTimer = setTimeout(() => updateServerAddressUi(), 2200);
+            }
+        }
+
+        function formatServerAddress(url) {
+            try {
+                const u = new URL(url);
+                return `${u.hostname}:${u.port || '8081'}`;
+            } catch {
+                return String(url || '');
+            }
+        }
+
+        function useCurrentServerAddress() {
+            const input = document.getElementById('serverAddressInput');
+            if (!input) return;
+            input.value = `${window.location.hostname}:${window.location.port || '8081'}`;
+            updateServerAddressUi();
+        }
+
+        async function saveServerAddressFromSettings() {
+            const input = document.getElementById('serverAddressInput');
+            const raw = String(input?.value || '').trim();
+            if (!raw) {
+                showSettingsToast('⚠️ اكتب العنوان مثل 192.168.0.81:8081');
+                return;
+            }
+
+            let url;
+            try {
+                url = normalizeVenomServerUrl(raw);
+                const parsed = new URL(url);
+                if (!parsed.hostname) throw new Error('عنوان غير صالح');
+            } catch {
+                showSettingsToast('❌ عنوان السيرفر غير صالح');
+                return;
+            }
+
+            // هذا الخيار أصبح للعرض/المرجع فقط. لا نغيّر عنوان الصفحة ولا نعيد التوجيه.
+            try { saveVenomServerUrl(url); } catch (_) {}
+            showSettingsToast('✅ تم حفظ العنوان كإعداد مرجعي فقط — لم يتم تغيير عنوان الصفحة.');
+            updateServerAddressUi();
+        }
+
+        function updateServerAddressUi() {
+            const current = settingsServerUrl();
+            const formatted = formatServerAddress(current);
+            const stat = document.getElementById('serverUrl');
+            const currentEl = document.getElementById('serverAddressCurrent');
+            const input = document.getElementById('serverAddressInput');
+            if (stat) stat.textContent = formatted;
+            if (currentEl && currentEl.dataset.tempMessage !== '1') currentEl.textContent = formatted;
+            if (input && document.activeElement !== input) input.value = formatted;
+            if (currentEl) currentEl.dataset.tempMessage = '';
+        }
+
+        // ============================================================
+        // الكاش الدائم الكامل
+        // ============================================================
+
+        let fullCacheTimer = null;
+        let fullCacheUiBooted = false;
+
+        window.loadCacheStats = async function() {
+            try {
+                const res = await serverFetch('/api/cache/stats');
+                const data = await res.json();
+                if (!data.success) return;
+                const box = document.getElementById('cacheStats');
+                if (box) {
+                    box.textContent = `📁 المجلدات: ${data.directories}  |  🖼️ الصور: ${data.images}  |  💾 المسار: ${data.cachePath}`;
+                }
+            } catch (_) {}
+        };
+
+        function setFullCacheUi(data) {
+            const status = document.getElementById('fullCacheStatus');
+            const progress = document.getElementById('fullCacheProgress');
+            const button = document.getElementById('buildFullCacheBtn');
+            if (!status || !progress || !button) return;
+
+            const percent = Number(data.percent || 0);
+            progress.style.width = `${percent}%`;
+
+            if (data.running) {
+                const total = Number(data.totalDirectories || 0);
+                const processed = Number(data.processedDirectories || 0);
+                const progressText = total > 0 ? `${percent}% — ${processed}/${total} مجلد` : `${percent}% — جاري اكتشاف المجلدات`;
+                status.textContent = `⏳ ${data.message || 'جاري بناء الكاش...'} — ${progressText}`;
+                button.disabled = true;
+                button.style.opacity = '0.6';
+                button.textContent = '⏳ جاري نسخ الكاش...';
+            } else {
+                status.textContent = `✅ ${data.message || 'اكتمل بناء الكاش'}`;
+                button.disabled = false;
+                button.style.opacity = '1';
+                button.textContent = '⚡ نسخ كاش المكتبة بالكامل';
+                if (data.errors && data.errors.length) {
+                    status.textContent += ` — أخطاء: ${data.errors.length}`;
+                }
+            }
+        }
+
+        window.buildFullLibraryCache = async function() {
+            const button = document.getElementById('buildFullCacheBtn');
+            if (!await askUserAsync('سيتم فحص جميع الأقراص وجميع المجلدات الفرعية وحفظ الكاش الدائم. قد تستغرق العملية وقتاً حسب حجم المكتبة. هل تريد المتابعة؟')) return;
+
+            try {
+                const res = await serverFetch('/api/cache/build-all', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: '{}'
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.error || 'فشل بدء بناء الكاش');
+                setFullCacheUi({ running: true, percent: 0, message: 'بدأ نسخ كاش المكتبة بالكامل', processedDirectories: 0, totalDirectories: 0 });
+                pollFullCacheStatus();
+            } catch (e) {
+                showSettingsToast('❌ خطأ: ' + e.message);
+                if (button) { button.disabled = false; button.textContent = '⚡ نسخ كاش المكتبة بالكامل'; }
+            }
+        };
+
+        async function pollFullCacheStatus() {
+            if (fullCacheTimer) clearTimeout(fullCacheTimer);
+            try {
+                const res = await serverFetch('/api/cache/build-status', { cache: 'no-store' });
+                const data = await res.json();
+                setFullCacheUi(data);
+                if (data.running) {
+                    fullCacheTimer = setTimeout(pollFullCacheStatus, 1000);
+                } else {
+                    loadCacheStats();
+                }
+            } catch (_) {
+                fullCacheTimer = setTimeout(pollFullCacheStatus, 2000);
+            }
+        }
+
+        // ============================================================
+        // تحميل البيانات
+        // ============================================================
+
+        async function loadAllData() {
+            await loadDisks();
+            await loadAds();
+            updateStats();
+        }
+
+        // -------------------- الأقراص --------------------
+        async function loadDisks() {
+            try {
+                const res = await serverFetch('/api/disks');
+                if (!res.ok) throw new Error('فشل التحميل');
+                const disks = await res.json();
+                renderDisks(disks);
+            } catch (e) {
+                document.getElementById('disksList').innerHTML =
+                    `<div class="empty-msg" style="color:#e74c3c;">❌ خطأ في تحميل الأقراص: ${e.message}</div>`;
+            }
+        }
+
+        window.removeAllDisks = async function() {
+            if (!await askUserAsync('هل أنت متأكد من حذف جميع الأقراص؟')) return;
+            try {
+                const res = await serverFetch('/api/disks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ disks: [] })
+                });
+                if (!res.ok) throw new Error('فشل حذف الأقراص');
+                await loadDisks();
+                updateStats();
+                try {
+                    const localSettings = JSON.parse(localStorage.getItem('restaha_settings') || '{}');
+                    localSettings.disks = [];
+                    localStorage.setItem('restaha_settings', JSON.stringify(localSettings));
+                } catch (_) {}
+                if (window.loadDisksFromServer) window.loadDisksFromServer();
+                showSettingsToast('✅ تم حذف جميع الأقراص');
+            } catch (e) {
+                showSettingsToast('❌ خطأ: ' + e.message);
+            }
+        };
+
+        let settingsSelectedDiskPath = '';
+        let settingsSelectedDiskImage = '';
+
+        window.chooseLocalDiskFolder = async function() {
+            if (!window.venomDesktop || typeof window.venomDesktop.chooseFolder !== 'function') {
+                showSettingsToast('⚠️ هذا الخيار يعمل داخل تطبيق Windows فقط');
+                return;
+            }
+            try {
+                const selectedPath = await window.venomDesktop.chooseFolder();
+                if (!selectedPath) return;
+                settingsSelectedDiskPath = selectedPath;
+                const pathElement = document.getElementById('newDiskPath');
+                if (pathElement) {
+                    pathElement.textContent = selectedPath;
+                    pathElement.dataset.path = selectedPath;
+                }
+                showSettingsToast('✅ تم اختيار مجلد محلي');
+            } catch (error) {
+                showSettingsToast('❌ تعذر اختيار المجلد: ' + error.message);
+            }
+        };
+
+        window.chooseLocalDiskImage = async function() {
+            if (!window.venomDesktop || typeof window.venomDesktop.chooseImage !== 'function') {
+                showSettingsToast('⚠️ هذا الخيار يعمل داخل تطبيق Windows فقط');
+                return;
+            }
+            try {
+                const selectedImage = await window.venomDesktop.chooseImage();
+                if (!selectedImage) return;
+                settingsSelectedDiskImage = selectedImage;
+                const textElement = document.getElementById('newDiskImageText');
+                if (textElement) textElement.textContent = 'تم اختيار صورة محلية';
+                const preview = document.getElementById('diskImagePreview');
+                if (preview) {
+                    preview.src = selectedImage;
+                    preview.classList.add('show');
+                }
+                showSettingsToast('✅ تم اختيار صورة محلية');
+            } catch (error) {
+                showSettingsToast('❌ تعذر اختيار الصورة: ' + error.message);
+            }
+        };
+
+        window.chooseLocalAdMedia = async function() {
+            if (!window.venomDesktop || typeof window.venomDesktop.chooseMedia !== 'function') {
+                showSettingsToast('⚠️ هذا الخيار يعمل داخل تطبيق Windows فقط');
+                return;
+            }
+            try {
+                const selectedFile = await window.venomDesktop.chooseMedia();
+                if (!selectedFile) return;
+                settingsSelectedAdFile = selectedFile;
+                const textElement = document.getElementById('newAdFileText');
+                if (textElement) textElement.textContent = pathLast(selectedFile);
+                showSettingsToast('✅ تم اختيار ملف الإعلان المحلي');
+            } catch (error) {
+                showSettingsToast('❌ تعذر اختيار ملف الإعلان: ' + error.message);
+            }
+        };
+
+        function renderDisks(disks) {
+            const container = document.getElementById('disksList');
+            if (!disks || disks.length === 0) {
+                container.innerHTML = `<div class="empty-msg">📭 لا توجد أقسام مضافة. أضف قسمًا الآن!</div>`;
+                return;
+            }
+            let html = '';
+            disks.forEach((disk, index) => {
+                const image = disk.iconImage || disk.image || '';
+                html += `
+                    <div class="disk-item">
+                        ${image ? `<img src="${image}" style="width:54px;height:54px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#0b0e14" alt="">` : `<div style="width:54px;height:54px;border-radius:10px;background:#0e1118;display:grid;place-items:center;font-size:24px">${disk.icon || '📁'}</div>`}
+                        <div class="info">
+                            <div class="name">${disk.name || ''}</div>
+                            <div class="path">${disk.path || ''}</div>
+                        </div>
+                        <div><button class="btn btn-danger" onclick="removeDisk(${index})">🗑️ حذف</button></div>
+                    </div>`;
+            });
+            container.innerHTML = html;
+            document.getElementById('diskCountBadge').textContent = disks.length;
+        }
+
+        window.addDisk = async function() {
+            const name = document.getElementById('newDiskName').value.trim();
+            const pathValue = settingsSelectedDiskPath.trim();
+            if (!name || !pathValue) {
+                showSettingsToast('⚠️ اختر اسم القسم ومساره من المستكشف');
+                return;
+            }
+            try {
+                const res = await serverFetch('/api/disks');
+                const disks = await res.json();
+                if (disks.some(d => String(d.path || '').toLowerCase() === pathValue.toLowerCase())) {
+                    showSettingsToast('⚠️ هذا المسار موجود بالفعل');
+                    return;
+                }
+                const disk = {
+                    id: 'disk-' + Date.now(),
+                    name,
+                    icon: '📁',
+                    iconImage: settingsSelectedDiskImage || null,
+                    path: pathValue,
+                    serverId: 'main',
+                    category: 'other'
+                };
+                disks.push(disk);
+                const saveRes = await serverFetch('/api/disks', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ disks })
+                });
+                if (!saveRes.ok) throw new Error('فشل الحفظ');
+                document.getElementById('newDiskName').value = '';
+                settingsSelectedDiskPath = '';
+                settingsSelectedDiskImage = '';
+                document.getElementById('newDiskPath').textContent = 'لم يتم اختيار مسار';
+                document.getElementById('newDiskImageText').textContent = 'لم يتم اختيار صورة';
+                const p = document.getElementById('diskImagePreview'); p.src = ''; p.classList.remove('show');
+                await loadDisks(); updateStats();
+                try {
+                    const localSettings = JSON.parse(localStorage.getItem('restaha_settings') || '{}');
+                    localSettings.disks = disks;
+                    localStorage.setItem('restaha_settings', JSON.stringify(localSettings));
+                } catch (_) {}
+                if (window.loadDisksFromServer) window.loadDisksFromServer();
+                showSettingsToast('✅ تمت إضافة القسم إلى المكتبة');
+            } catch (e) { showSettingsToast('❌ خطأ: ' + e.message); }
+        };
+
+        window.removeDisk = async function(index) {
+            if (!await askUserAsync('هل أنت متأكد من حذف هذا القسم؟')) return;
+            try {
+                const res = await serverFetch('/api/disks');
+                const disks = await res.json();
+                disks.splice(index, 1);
+                const saveRes = await serverFetch('/api/disks', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ disks })
+                });
+                if (!saveRes.ok) throw new Error('فشل الحذف');
+                await loadDisks(); updateStats();
+                try {
+                    const localSettings = JSON.parse(localStorage.getItem('restaha_settings') || '{}');
+                    localSettings.disks = disks;
+                    localStorage.setItem('restaha_settings', JSON.stringify(localSettings));
+                } catch (_) {}
+                if (window.loadDisksFromServer) window.loadDisksFromServer();
+                showSettingsToast('🗑️ تم حذف القسم');
+            } catch (e) { showSettingsToast('❌ خطأ: ' + e.message); }
+        };
+
+        // -------------------- الإعلانات --------------------
+        async function loadAds() {
+            try {
+                const res = await serverFetch('/api/ads');
+                if (!res.ok) throw new Error('فشل التحميل');
+                const ads = await res.json();
+                renderAds(ads);
+            } catch (e) {
+                document.getElementById('adsList').innerHTML =
+                    `<div class="empty-msg" style="color:#e74c3c;">❌ خطأ في تحميل الإعلانات: ${e.message}</div>`;
+            }
+        }
+
+        function renderAds(ads) {
+            const container = document.getElementById('adsList');
+            if (!ads || ads.length === 0) {
+                container.innerHTML = `<div class="empty-msg">📭 لا توجد إعلانات. ارفع إعلاناً الآن!</div>`;
+                return;
+            }
+            let html = '';
+            ads.forEach((ad, index) => {
+                const isVideo = ad.url && (ad.url.endsWith('.mp4') || ad.url.endsWith('.webm') || ad.url.endsWith('.mov'));
+                const previewHtml = isVideo ?
+                    `<video src="${ad.url}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;" muted></video>` :
+                    `<img src="${ad.url}" class="preview" alt="إعلان" />`;
+                html += `
+                    <div class="ad-item">
+                        <div class="info">
+                            ${previewHtml}
+                            <div class="url">${ad.url || 'بدون رابط'}</div>
+                            ${ad.link ? `<div style="font-size:12px;color:#aaa;">🔗 ${ad.link}</div>` : ''}
+                        </div>
+                        <div>
+                            <button class="btn btn-danger" onclick="removeAd(${index})">🗑️ حذف</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('adCountBadge').textContent = ads.length;
+        }
+
+        let settingsSelectedAdFile = '';
+
+        window.uploadAd = async function() {
+            const link = document.getElementById('newAdLink').value.trim();
+            if (!settingsSelectedAdFile) {
+                showSettingsToast('⚠️ اختر صورة أو فيديو للإعلان أولًا');
+                return;
+            }
+            try {
+                const importRes = await serverFetch('/api/import-selected-file', {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({path:settingsSelectedAdFile, kind:'ad'})
+                });
+                const imported = await importRes.json();
+                if (!importRes.ok || !imported.success) throw new Error(imported.error || 'فشل نسخ ملف الإعلان');
+
+                const res = await serverFetch('/api/ads');
+                const ads = await res.json();
+                ads.push({
+                    url: imported.url,
+                    image: imported.url,
+                    link,
+                    title: 'إعلان',
+                    active: true,
+                    order: ads.length
+                });
+                const saveRes = await serverFetch('/api/ads', {
+                    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ads})
+                });
+                if (!saveRes.ok) throw new Error('فشل حفظ الإعلان');
+
+                settingsSelectedAdFile = '';
+                document.getElementById('newAdLink').value = '';
+                document.getElementById('newAdFileText').textContent = 'لم يتم اختيار ملف';
+                const p = document.getElementById('adImagePreview'); p.src=''; p.classList.remove('show');
+                await loadAds(); updateStats();
+                showSettingsToast('✅ تمت إضافة الإعلان بنجاح');
+            } catch(e) { showSettingsToast('❌ خطأ: ' + e.message); }
+        };
+
+        window.removeAd = async function(index) {
+            if (!await askUserAsync('هل أنت متأكد من حذف هذا الإعلان؟')) return;
+            try {
+                const res = await serverFetch('/api/ads');
+                const ads = await res.json();
+                ads.splice(index, 1);
+                const saveRes = await serverFetch('/api/ads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ads })
+                });
+                if (!saveRes.ok) throw new Error('فشل الحذف');
+                await loadAds();
+                updateStats();
+                if (typeof loadAdsIntoHero === 'function') {
+                    await loadAdsIntoHero();
+                }
+                showSettingsToast('🗑️ تم حذف الإعلان!');
+            } catch (e) {
+                showSettingsToast('❌ خطأ: ' + e.message);
+            }
+        };
+
+        window.resetAllAds = async function() {
+            if (!await askUserAsync('⚠️ هل أنت متأكد من حذف جميع الإعلانات؟')) return;
+            try {
+                const res = await serverFetch('/api/ads/reset', { method: 'POST' });
+                if (!res.ok) throw new Error('فشل إعادة التعيين');
+                await loadAds();
+                updateStats();
+                if (typeof loadAdsIntoHero === 'function') {
+                    await loadAdsIntoHero();
+                }
+                showSettingsToast('🗑️ تم حذف جميع الإعلانات!');
+            } catch (e) {
+                showSettingsToast('❌ خطأ: ' + e.message);
+            }
+        };
+
+
+        // ============================================================
+        // مستكشف الملفات الداخلي
+        // ============================================================
+        const explorerState = { mode:'folder', target:'', path:'', roots:[], stack:[], selectedPath:'', selectedKind:'' };
+        const CLIENT_EXPLORER = 'http://192.168.0.80:8765';
+
+        function exEsc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+
+        async function clientExplorerFetch(pathValue){
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 5000);
+            try{
+                const res = await fetch(`${CLIENT_EXPLORER}/browse`, {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({path:pathValue}),
+                    signal:controller.signal
+                });
+                const data = await res.json();
+                if(!res.ok || !data.success) throw new Error(data.error || 'تعذر قراءة جهاز المستخدم');
+                return data;
+            } finally { clearTimeout(timer); }
+        }
+
+        async function clientExplorerRoots(){
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 5000);
+            try{
+                const res = await fetch(`${CLIENT_EXPLORER}/roots`, {signal:controller.signal});
+                const data = await res.json();
+                if(!res.ok || !data.success) throw new Error(data.error || 'تعذر قراءة جهاز المستخدم');
+                return Array.isArray(data.roots) ? data.roots : [];
+            } finally { clearTimeout(timer); }
+        }
+
+        async function openExplorer(mode, target){
+            explorerState.mode = mode; explorerState.target = target; explorerState.path=''; explorerState.stack=[]; explorerState.selectedPath=''; explorerState.selectedKind='';
+            const overlay=document.getElementById('venomExplorerOverlay');
+            overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+            document.getElementById('explorerTitle').textContent = mode==='folder'?'📁 اختيار مسار القسم':mode==='image'?'🖼️ اختيار صورة القسم':'📁 اختيار ملف الإعلان';
+            document.getElementById('explorerSubtitle').textContent = mode==='folder'?'اختر من جهاز المستخدم: الأقراص أو الشبكة ثم افتح المجلد المطلوب':mode==='image'?'اختر صورة من جهاز المستخدم':'اختر صورة أو فيديو من جهاز المستخدم';
+            document.getElementById('explorerSelection').textContent='لم يتم الاختيار';
+            document.getElementById('explorerConfirm').textContent=mode==='folder'?'✓ اختيار هذا المجلد':'✓ اختيار الملف';
+            document.getElementById('explorerItems').innerHTML='<div class="ex-empty">⏳ جاري الاتصال بمستكشف جهازك...</div>';
+            try{
+                await clientExplorerRoots();
+                await explorerLoadRoots();
+            }catch(e){
+                document.getElementById('explorerItems').innerHTML=`<div class="ex-empty">⚠️ مستكشف جهاز المستخدم غير متصل.<br><br>شغّل خدمة VENOM Client Explorer على هذا الجهاز ثم افتح النافذة من جديد.</div>`;
+                document.getElementById('explorerRoots').innerHTML=`<div class="ex-empty">⚠️ ${exEsc(e.message)}</div>`;
+                return;
+            }
+        }
+        window.openExplorer=openExplorer;
+
+        function closeExplorer(){ const x=document.getElementById('venomExplorerOverlay'); x.classList.remove('open'); x.setAttribute('aria-hidden','true'); }
+        window.closeExplorer=closeExplorer;
+
+        async function explorerLoadRoots(){
+            try{
+                const roots = await clientExplorerRoots();
+                explorerState.roots=roots;
+                const el=document.getElementById('explorerRoots');
+                el.innerHTML=explorerState.roots.length ? explorerState.roots.map((r,i)=>{
+                    const icon = r.kind==='network'?'🌐':r.kind==='pc'?'💻':'💽';
+                    return `<button class="ex-item" type="button" data-root="${i}"><span class="ex-icon">${icon}</span><span class="ex-name">${exEsc(r.name)}</span></button>`;
+                }).join('') : '<div class="ex-empty">لا توجد أقراص أو شبكة متاحة</div>';
+                el.querySelectorAll('[data-root]').forEach(b=>b.onclick=()=>explorerOpenPath(explorerState.roots[Number(b.dataset.root)].path,true));
+                const firstNetwork = explorerState.roots.find(r=>r.kind==='network');
+                const firstPc = explorerState.roots.find(r=>r.kind==='pc');
+                if(firstNetwork) await explorerOpenPath(firstNetwork.path,true);
+                else if(firstPc) await explorerOpenPath(firstPc.path,true);
+            }catch(e){
+                document.getElementById('explorerRoots').innerHTML=`<div class="ex-empty">⚠️ ${exEsc(e.message)}</div>`;
+                throw e;
+            }
+        }
+
+        async function explorerOpenPath(pathValue,push=true){
+            const items=document.getElementById('explorerItems'); const pathEl=document.getElementById('explorerPath');
+            items.innerHTML='<div class="ex-empty">⏳ جاري قراءة المسار...</div>';
+            try{
+                const data=await clientExplorerFetch(pathValue);
+                explorerState.path=data.path; if(push) explorerState.stack.push(data.path); pathEl.value=data.path;
+                const all=Array.isArray(data.items)?data.items:[];
+                const folders=all.filter(x=>x.isDir || x.kind==='folder');
+                const files=all.filter(x=>!x.isDir && x.kind==='file');
+                let html=`<div class="ex-grid">`;
+                if(explorerState.stack.length>1) html+=`<button class="ex-card" type="button" id="explorerParent"><div class="ex-icon">↩️</div><div class="ex-name">مجلد أعلى</div></button>`;
+                folders.forEach((f,i)=>{html+=`<button class="ex-card" type="button" data-folder="${i}"><div class="ex-icon">📁</div><div class="ex-name">${exEsc(f.name)}</div><div class="ex-kind">مجلد</div></button>`});
+                files.forEach((f,i)=>{
+                    const isImage=/\.(jpg|jpeg|png|webp|gif|bmp|svg)$/i.test(f.name);
+                    const isVideo=/\.(mp4|mkv|avi|mov|wmv|m4v|webm|ts|m2ts|flv)$/i.test(f.name);
+                    if(explorerState.mode==='image' && !isImage) return;
+                    if(explorerState.mode==='ad' && !isImage && !isVideo) return;
+                    const thumb=isImage?`<div class="ex-thumb" style="display:grid;place-items:center;font-size:42px">🖼️</div>`:`<div class="ex-thumb" style="display:grid;place-items:center;font-size:42px">🎬</div>`;
+                    html+=`<button class="ex-card" type="button" data-file="${i}">${thumb}<div class="ex-name">${exEsc(f.name)}</div><div class="ex-kind">${isVideo?'فيديو':'صورة'}</div></button>`;
+                });
+                html+='</div>';
+                if(!folders.length && !files.length) html='<div class="ex-empty">📭 لا توجد عناصر قابلة للاختيار</div>';
+                items.innerHTML=html;
+                document.getElementById('explorerParent')?.addEventListener('click',()=>explorerUp());
+                items.querySelectorAll('[data-folder]').forEach(b=>b.onclick=()=>explorerOpenPath(folders[Number(b.dataset.folder)].path,true));
+                items.querySelectorAll('[data-file]').forEach(b=>b.onclick=()=>{const f=files[Number(b.dataset.file)]; const isImage=/\.(jpg|jpeg|png|webp|gif|bmp|svg)$/i.test(f.name); const isVideo=/\.(mp4|mkv|avi|mov|wmv|m4v|webm|ts|m2ts|flv)$/i.test(f.name); if(explorerState.mode!=='folder' && ((explorerState.mode==='image'&&isImage)||(explorerState.mode==='ad'&&(isImage||isVideo))) ) explorerSelect(f.path,'file',f.name);});
+                pathEl.scrollLeft=pathEl.scrollWidth;
+            }catch(e){items.innerHTML=`<div class="ex-empty">⚠️ ${exEsc(e.message)}</div>`;}
+        }
+        window.explorerOpenPath=explorerOpenPath;
+
+        async function explorerUp(){
+            const current=explorerState.path;
+            if(!current) return;
+            if(current==='__NETWORK__' || current==='__THIS_PC__'){
+                explorerState.path=''; explorerState.stack=[]; document.getElementById('explorerPath').value=''; await explorerLoadRoots(); return;
+            }
+            let normalized=String(current).replace(/[\\/]+$/,'');
+            if(/^[A-Za-z]:$/.test(normalized)) { explorerState.path='__THIS_PC__'; explorerState.stack=[]; await explorerOpenPath('__THIS_PC__',true); return; }
+            const idx=Math.max(normalized.lastIndexOf('\\'),normalized.lastIndexOf('/'));
+            const parent=idx>0?normalized.slice(0,idx):'';
+            if(parent && parent!==current){ explorerState.stack.pop(); await explorerOpenPath(parent,false); }
+            else { explorerState.path=''; explorerState.stack=[]; await explorerLoadRoots(); }
+        }
+        window.explorerUp=explorerUp;
+        window.explorerRefresh=()=>explorerState.path?explorerOpenPath(explorerState.path,false):explorerLoadRoots();
+
+        function explorerSelect(pathValue,kind,label){
+            explorerState.selectedPath=pathValue; explorerState.selectedKind=kind;
+            document.getElementById('explorerSelection').textContent=label?`✓ ${label}`:pathValue;
+        }
+
+        async function confirmExplorerSelection(){
+            if(explorerState.mode==='folder'){
+                if(!explorerState.path || explorerState.path.startsWith('__')){showSettingsToast('⚠️ اختر مجلدًا فعليًا من جهاز المستخدم');return;}
+                settingsSelectedDiskPath=explorerState.path;
+                document.getElementById('newDiskPath').textContent=explorerState.path;
+                document.getElementById('newDiskPath').dataset.path=explorerState.path;
+                closeExplorer(); return;
+            }
+            if(!explorerState.selectedPath){showSettingsToast('⚠️ اختر ملفًا أولًا');return;}
+            try{
+                if(explorerState.mode==='image'){
+                    // الصورة المحلية تُرسل إلى السيرفر لنسخها داخل uploads.
+                    showSettingsToast('ℹ️ اختيار صورة من جهاز المستخدم يحتاج رفعها إلى السيرفر عند التأكيد');
+                    closeExplorer(); return;
+                }
+                if(explorerState.mode==='ad'){
+                    showSettingsToast('ℹ️ اختر ملف الإعلان ثم استخدم زر الرفع لإرساله إلى السيرفر');
+                    closeExplorer(); return;
+                }
+                closeExplorer();
+            }catch(e){showSettingsToast('❌ '+e.message);}
+        }
+        window.confirmExplorerSelection=confirmExplorerSelection;
+        function pathLast(p){return String(p||'').split(/[\\/]/).filter(Boolean).pop()||p;}
+
+        // -------------------- الأدوات العامة --------------------
+        function updateStats() {
+            serverFetch('/api/disks').then(r => r.json()).then(d => {
+                document.getElementById('diskCount').textContent = d.length;
+            }).catch(() => {});
+            serverFetch('/api/ads').then(r => r.json()).then(d => {
+                document.getElementById('adCount').textContent = d.length;
+            }).catch(() => {});
+        }
+
+        window.refreshAll = function() {
+            loadAllData();
+            if (typeof loadAdsIntoHero === 'function') {
+                loadAdsIntoHero();
+            }
+            showSettingsToast('🔄 تم تحديث جميع البيانات!');
+        };
+
+        window.clearCache = async function() {
+            try {
+                const res = await serverFetch('/api/clear-cache', { method: 'POST' });
+                if (res.ok) showSettingsToast('🧹 تم مسح الكاش بنجاح!');
+                else showSettingsToast('❌ فشل مسح الكاش');
+            } catch (e) {
+                showSettingsToast('❌ خطأ: ' + e.message);
+            }
+        };
+
+        // ============================================================
+        // تحميل أولي
+        // ============================================================
+        updateServerAddressUi();
+        loadAllData();
+        loadCacheStats();
+        pollFullCacheStatus();
+        fullCacheUiBooted = true;
+
+        // محاولة تحميل الإعلانات في الهيرو بعد تحميل الصفحة (اختياري)
+        setTimeout(() => {
+            if (typeof loadAdsIntoHero === 'function') {
+                loadAdsIntoHero();
+            }
+        }, 2000);
+    </script>
+
+
+<div id="venomExplorerOverlay" aria-hidden="true">
+  <div id="venomExplorer" role="dialog" aria-modal="true" aria-labelledby="explorerTitle">
+    <div class="ex-head">
+      <div>
+        <div class="ex-title" id="explorerTitle">📁 مستكشف الملفات</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px" id="explorerSubtitle">اختر المسار من أقراص السيرفر</div>
+      </div>
+      <button class="ex-close" type="button" onclick="closeExplorer()">×</button>
+    </div>
+    <div class="ex-toolbar">
+      <button class="ex-btn" type="button" onclick="explorerUp()">↩️ رجوع</button>
+      <input class="ex-path" id="explorerPath" readonly />
+      <button class="ex-btn blue" type="button" onclick="explorerRefresh()">🔄</button>
+    </div>
+    <div class="ex-body">
+      <div class="ex-roots" id="explorerRoots"></div>
+      <div class="ex-items" id="explorerItems"><div class="ex-empty">اختر قرصًا أو مسارًا للبدء</div></div>
+    </div>
+    <div class="ex-foot">
+      <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:11px" id="explorerSelection">لم يتم الاختيار</div>
+      <div class="top-actions">
+        <button class="btn btn-back" type="button" onclick="closeExplorer()">إلغاء</button>
+        <button class="btn btn-success" id="explorerConfirm" type="button" onclick="confirmExplorerSelection()">✓ اختيار</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

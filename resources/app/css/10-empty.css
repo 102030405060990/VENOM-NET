@@ -1,0 +1,11 @@
+.empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+    background: rgba(17,21,27,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px dashed var(--border);
+    border-radius: 18px;
+    grid-column: 1 / -1;
+    font-size: 16px;
+}

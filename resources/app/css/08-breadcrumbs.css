@@ -1,0 +1,51 @@
+.crumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 25px 0;
+    color: var(--muted);
+    position: relative;
+    z-index: 2;
+    font-size: 15px;
+    padding: 0;
+}
+.crumbs button {
+    border: 0;
+    background: rgba(23,28,35,0.6);
+    color: #dfe4eb;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+.crumbs button:hover { color: var(--accent); }
+/* Folder/category pages: no breadcrumb strip; title sits under the fixed header. */
+.crumbs{display:none!important;}
+.folderPageHeader{
+    padding:104px 25px 8px!important;
+    margin:0!important;
+    position:relative!important;
+    z-index:3!important;
+}
+.folderPageHeader h1{
+    margin:0!important;
+    color:#fff!important;
+    font-size:clamp(26px,3vw,40px)!important;
+    font-weight:900!important;
+    letter-spacing:-.4px!important;
+    text-shadow:0 3px 22px rgba(0,0,0,.4)!important;
+}
+@media(max-width:780px){
+ .folderPageHeader{padding:86px 16px 6px!important;}
+ .folderPageHeader h1{font-size:25px!important;}
+}
+
+/* Folder pages: clean title only, no breadcrumb/counter labels */
+.folderPageHeader + .section .sectionHead h2{margin:0!important;}
+.folderPageHeader + .section .sectionHead h2::before{background:#fff!important;box-shadow:0 0 18px rgba(255,255,255,.14)!important;}
+.folderPageHeader + .section .sectionHead small{display:none!important;}
+
+/* القسم يظهر مرة واحدة فقط فوق البطاقات — إخفاء العنوان الكبير القديم */
+.folderPageHeader{display:none!important;}

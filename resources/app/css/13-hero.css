@@ -1,0 +1,1077 @@
+/* ============================================================
+   VENOM NET — HERO
+   بانر Edge-to-Edge والهيدر فوقه مباشرة
+   ============================================================ */
+
+html,
+body,
+.app,
+#appContainer,
+main,
+#main {
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    border: 0 !important;
+}
+
+#main > .hero-banner:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* البانر يبدأ من أعلى الصفحة */
+.hero-banner {
+    position: relative !important;
+
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    left: 50% !important;
+    transform: translateX(-50%) scale(0.9) !important;
+
+    overflow: hidden !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    background: var(--bg-deep, #06070a) !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important;
+}
+
+.hero-banner .hero-content,
+.hero-banner .ad-slide {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+
+    overflow: hidden !important;
+}
+
+/* الفيديو والصورة بدون letterbox */
+.hero-banner .ad-slide video,
+.hero-banner .ad-slide img {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    background: transparent !important;
+}
+
+/* طبقة تدرج خفيفة فقط */
+.hero-banner .glass-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+
+    pointer-events: none !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.12) 0%,
+            rgba(0,0,0,.025) 28%,
+            rgba(0,0,0,0) 50%,
+            rgba(4,6,10,.68) 100%
+        ) !important;
+}
+
+/* قراءة النص من دون صنع شريط أسود */
+.hero-banner .ad-slide::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 3 !important;
+
+    pointer-events: none !important;
+
+    background:
+        linear-gradient(
+            to left,
+            rgba(4,6,10,.40) 0%,
+            rgba(4,6,10,.12) 36%,
+            rgba(4,6,10,0) 64%
+        ) !important;
+}
+
+/* محتوى الإعلان */
+.hero-banner .ad-content {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 5 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+
+    width: min(560px, 38vw) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 3.5vw 13vh 0 !important;
+    box-sizing: border-box !important;
+
+    color: #fff !important;
+    text-align: right !important;
+    direction: rtl !important;
+
+    pointer-events: none !important;
+}
+
+.hero-banner .ad-kicker {
+    display: inline-block !important;
+    margin: 0 0 12px !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.18rem !important;
+    color: rgba(255,255,255,.92) !important;
+    text-transform: uppercase !important;
+    opacity: 0.95 !important;
+}
+
+.hero-banner .ad-content .ad-year {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+
+    background: transparent !important;
+    color: rgba(255,255,255,.82) !important;
+
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
+}
+
+.hero-banner .ad-content .ad-title {
+    max-width: 520px !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+
+    font-size: clamp(38px, 4.4vw, 82px) !important;
+    line-height: 0.94 !important;
+    font-weight: 900 !important;
+
+    color: #fff !important;
+    text-shadow: 0 4px 32px rgba(0,0,0,.78) !important;
+    text-align: right !important;
+    transform: translateY(0) !important;
+}
+
+.hero-banner .ad-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-top: 14px !important;    margin-right: 0 !important;    color: rgba(255,255,255,.82) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.hero-banner .ad-meta span {
+    display: inline-flex !important;
+    align-items: center !important;
+    position: relative !important;
+}
+
+.hero-banner .ad-meta span:not(:last-child)::after {
+    content: '•' !important;
+    color: rgba(255,255,255,.7) !important;
+    margin: 0 8px !important;
+}
+
+.hero-banner .ad-content .ad-desc {
+    max-width: 470px !important;
+    margin: 14px 0 0 !important;
+    margin-right: 0 !important;
+
+    color: rgba(255,255,255,.86) !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    text-align: right !important;
+
+    text-shadow: 0 3px 22px rgba(0,0,0,.75) !important;
+}
+
+.hero-banner .hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 14px !important;
+    margin-top: 18px !important;
+    pointer-events: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+/* زر الصوت داخل البانر */
+.hero-inline-controls {
+    position: absolute !important;
+    left: 26px !important;
+    bottom: 10vh !important;
+    top: auto !important;
+    z-index: 30 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 8px 10px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    background: rgba(8, 12, 18, .34) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 16px 30px rgba(0,0,0,.22) !important;
+}
+
+.hero-play-btn,
+.hero-volume-btn {
+    width: 48px !important;
+    height: 48px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 14px !important;
+    border: 0 !important;
+    background: rgba(255,255,255,.08) !important;
+    color: #fff !important;
+
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: .2s ease !important;
+}
+
+.hero-play-btn svg,
+.hero-volume-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: currentColor !important;
+    display: block !important;
+}
+
+.hero-play-btn {
+    background: #fff !important;
+    color: #121722 !important;
+    box-shadow: 0 10px 24px rgba(255,255,255,.18) !important;
+}
+
+.hero-play-btn:hover,
+.hero-volume-btn:hover {
+    transform: translateY(-1px) !important;
+}
+
+.hero-play-btn:hover {
+    background: rgba(255,255,255,.96) !important;
+}
+
+.hero-volume-btn:hover {
+    background: rgba(255,255,255,.16) !important;
+}
+
+.hero-volume-btn.muted {
+    background: rgba(255,255,255,.06) !important;
+    border-color: rgba(255,255,255,.18) !important;
+}
+
+/* زر المشاهدة */
+.hero-banner .watch-now-btn,
+.hero-banner .hero-more-btn,
+.hero-banner .hero-info-btn {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    z-index: 12 !important;
+
+    min-height: 46px !important;
+    padding: 0 26px !important;
+
+    border: 0 !important;
+    border-radius: 10px !important;
+
+    font-size: 15px !important;
+    font-weight: 900 !important;
+
+    cursor: pointer !important;
+    pointer-events: auto !important;
+
+    transition: .2s ease !important;
+}
+
+.hero-banner .watch-now-btn {
+    background: #fff !important;
+    color: #111318 !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.22) !important;
+}
+
+.hero-banner .watch-now-btn .btn-icon,
+.hero-banner .hero-more-btn .btn-icon,
+.hero-banner .hero-info-btn .btn-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 18px !important;
+    height: 18px !important;
+    line-height: 1 !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+}
+
+.hero-banner .watch-now-btn .play-icon {
+    font-size: 13px !important;
+    transform: translateX(-1px) !important;
+}
+
+.hero-banner .hero-more-btn,
+.hero-banner .hero-info-btn {
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    color: #fff !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+.hero-banner .hero-info-btn .info-icon {
+    font-size: 12px !important;
+    border: 1px solid rgba(255,255,255,.5) !important;
+    border-radius: 50% !important;
+    width: 18px !important;
+    height: 18px !important;
+    font-family: serif !important;
+    font-weight: 700 !important;
+}
+
+.hero-banner .hero-more-btn {
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(255,255,255,.24) !important;
+    color: #fff !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+.hero-banner .watch-now-btn:hover,
+.hero-banner .hero-more-btn:hover {
+    transform: translateY(-2px) !important;
+}
+
+.hero-banner .watch-now-btn.hidden {
+    display: none !important;
+}
+
+/* نقاط التنقل */
+.hero-banner .ad-dots {
+    position: absolute !important;
+
+    left: 50% !important;
+    bottom: 4vh !important;
+
+    z-index: 14 !important;
+
+    display: flex !important;
+    gap: 8px !important;
+
+    transform: translateX(-50%) !important;
+}
+
+.hero-banner .ad-dots .dot {
+    width: 8px !important;
+    height: 8px !important;
+
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+
+    background: rgba(255,255,255,.35) !important;
+    cursor: pointer !important;
+
+    transition: .2s ease !important;
+}
+
+.hero-banner .ad-dots .dot.active {
+    background: #fff !important;
+    transform: scale(1.25) !important;
+}
+
+@media (max-width: 900px) {
+    .hero-inline-controls {
+        left: 18px !important;
+        top: 15% !important;
+    }
+
+    .hero-play-btn,
+    .hero-volume-btn {
+        width: 46px !important;
+        height: 46px !important;
+    }
+
+    .hero-banner .ad-content {
+        padding: 0 7vw 18vh !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-inline-controls {
+        left: 14px !important;
+        top: 15% !important;
+    }
+
+    .hero-play-btn,
+    .hero-volume-btn {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 18px !important;
+    }
+
+    .hero-banner .ad-content {
+        align-items: center !important;
+        padding: 0 18px 20vh !important;
+        text-align: center !important;
+    }
+
+    .hero-banner .ad-content .ad-title {
+        font-size: 30px !important;
+    }
+
+    .hero-banner .ad-content .ad-desc {
+        font-size: 14px !important;
+    }
+
+    .hero-banner .watch-now-btn {
+        left: 50% !important;
+        bottom: 9vh !important;
+        transform: translateX(-50%) !important;
+        font-size: 15px !important;
+        padding: 11px 27px !important;
+    }
+}
+
+/* Curved 4K-style screen frame */
+#heroBannerBox.hero-banner {
+    width: min(1600px, calc(100vw - 48px)) !important;
+    max-width: 1600px !important;
+    height: min(78vh, 900px) !important;
+    min-height: 560px !important;
+    margin: 18px auto 0 !important;
+    left: auto !important;
+    transform: none !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 28px 80px rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.035), inset 46px 0 70px rgba(0,0,0,.20), inset -46px 0 70px rgba(0,0,0,.20), inset 0 -24px 55px rgba(0,0,0,.32) !important;
+    isolation: isolate !important;
+}
+
+#heroBannerBox .hero-content,
+#heroBannerBox .ad-slide {
+    border-radius: inherit !important;
+}
+
+#heroBannerBox .ad-slide::after {
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.46) 0%, rgba(0,0,0,.12) 8%, transparent 22%, transparent 78%, rgba(0,0,0,.12) 92%, rgba(0,0,0,.46) 100%),
+        linear-gradient(180deg, rgba(255,255,255,.08), transparent 12%, transparent 86%, rgba(0,0,0,.30)) !important;
+    border-radius: inherit !important;
+}
+
+/* Optical barrel curve: the center stays bright while the screen edges recede. */
+#heroBannerBox .ad-slide::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: inherit !important;
+    box-shadow: inset 30px 0 48px -38px rgba(255,255,255,.75), inset -30px 0 48px -38px rgba(255,255,255,.75) !important;
+}
+
+#heroBannerBox .ad-slide video,
+#heroBannerBox .ad-slide img,
+#heroBannerBox .default-hero-art {
+    image-rendering: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+}
+
+.hero-banner .ad-content::before {
+    content: none !important;
+    position: absolute !important;
+    top: 26px !important;
+    right: 28px !important;
+    z-index: 8 !important;
+    padding: 5px 8px !important;
+    border: 1px solid rgba(255,255,255,.3) !important;
+    border-radius: 4px !important;
+    background: rgba(0,0,0,.38) !important;
+    color: rgba(255,255,255,.92) !important;
+    font: 800 11px/1 Arial, sans-serif !important;
+    letter-spacing: 1px !important;
+}
+
+@media (max-width: 600px) {
+    #heroBannerBox.hero-banner {
+        width: calc(100vw - 24px) !important;
+        height: 70vh !important;
+        min-height: 520px !important;
+        margin-top: 10px !important;
+        border-radius: 14px !important;
+    }
+
+    #heroBannerBox .ad-content::before {
+        top: 18px !important;
+        right: 18px !important;
+    }
+}
+
+/* ============================================================
+   FINAL HERO OVERRIDE — edge to edge, no top black strip
+   ============================================================ */
+/* html,body,#appContainer,#main{margin:0!important;padding:0!important;}
+#main{background:transparent!important;}
+#heroBannerBox.hero-banner{width:100vw!important;max-width:none!important;height:100vh!important;min-height:100svh!important;margin:0!important;padding:0!important;left:50%!important;transform:translateX(-50%)!important;background:transparent!important;}
+#heroBannerBox .hero-content,#heroBannerBox .ad-slide{top:0!important;margin:0!important;padding:0!important;background:transparent!important;}
+#heroBannerBox .ad-slide video,#heroBannerBox .ad-slide img{object-fit:cover!important;object-position:center!important;background:transparent!important;} */
+
+/* Netflix-style presentation for the featured title */
+.hero-banner {
+    height: 90vh !important;
+    min-height: 630px !important;
+    background: #090b10 !important;
+    position: relative;
+}
+
+.hero-banner .default-hero-art {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    background:
+        linear-gradient(90deg, rgba(5, 7, 11, .08) 0%, rgba(5, 7, 11, .12) 34%, rgba(5, 7, 11, .92) 100%),
+        linear-gradient(180deg, rgba(5, 7, 11, .08) 50%, #090b10 100%),
+        url('https://i.ibb.co/376P5V5/text.png') center 24% / cover no-repeat !important;
+    filter: saturate(.9) contrast(1.04) !important;
+    transform: scale(1.02) !important;
+}
+
+.hero-banner .glass-overlay {
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(8, 11, 16, .08) 45%, rgba(8, 11, 16, .88) 100%),
+        linear-gradient(180deg, rgba(8, 11, 16, .02) 38%, rgba(8, 11, 16, .12) 56%, rgba(8, 11, 16, .52) 74%, rgba(8, 11, 16, .88) 90%, #090b10 100%) !important;
+}
+
+.hero-banner .ad-content, 
+.hero-banner .default-hero-content {
+    justify-content: flex-end !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+    padding: 0 3.5vw 12vh 0 !important;
+    width: min(560px, 38vw) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+.hero-banner .ad-content .ad-kicker {
+    margin-bottom: 18px !important;
+    color: #e50914 !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+}
+
+.hero-banner .ad-content .ad-year {
+    padding: 0 !important;
+    margin-bottom: 14px !important;
+    background: transparent !important;
+    color: rgba(255,255,255,.78) !important;
+    font-size: 15px !important;
+}
+
+.hero-banner .ad-content .ad-title {
+    max-width: 560px !important;
+    font-size: clamp(40px, 5vw, 76px) !important;
+    line-height: 1.08 !important;
+}
+
+.hero-banner .ad-content .ad-meta {
+    display: flex !important;
+    gap: 16px !important;
+    margin-top: 18px !important;
+    color: rgba(255,255,255,.84) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.hero-banner .ad-content .ad-meta span + span::before {
+    content: '•' !important;
+    margin-left: 16px !important;
+    color: rgba(255,255,255,.44) !important;
+}
+
+.hero-banner .ad-content .ad-desc {
+    max-width: 500px !important;
+    margin-top: 16px !important;
+    color: rgba(255,255,255,.78) !important;
+    font-size: 16px !important;
+}
+
+.default-hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-top: 24px !important;
+    pointer-events: auto !important;
+}
+
+.hero-banner .hero-info-btn {
+    padding: 13px 24px !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background: rgba(109, 109, 110, .72) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+}
+
+.hero-banner .hero-info-btn:hover {
+    background: rgba(109, 109, 110, .94) !important;
+}
+
+.hero-banner .watch-now-btn {
+    position: static !important;
+    padding: 13px 28px !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 600px) {
+    .hero-banner {
+        height: 78vh !important;
+        min-height: 560px !important;
+    }
+
+    .hero-banner .ad-content {
+        align-items: center !important;
+        padding: 92px 20px 92px !important;
+        text-align: center !important;
+    }
+
+    .hero-banner .ad-content .ad-title {
+        font-size: 36px !important;
+    }
+
+    .hero-banner .ad-content .ad-meta,
+    .default-hero-actions {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .hero-banner .ad-content .ad-desc {
+        font-size: 14px !important;
+    }
+}
+
+/* Keep the curved screen visibly inset from the desktop window edges. */
+#heroBannerBox.hero-banner {
+    width: 100vw !important;
+    max-width: none !important;
+    height: 100vh !important;
+    min-height: 100svh !important;
+    margin: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+}
+
+@media (max-width: 600px) {
+    #heroBannerBox.hero-banner {
+        width: 100vw !important;
+        min-height: 100svh !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* Balanced desktop inset: keep the screen large without touching the edges. */
+@media (min-width: 601px) {
+    #heroBannerBox.hero-banner {
+        width: 100vw !important;
+        max-width: none !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Keep the curved frame clean; do not darken the image edges. */
+#heroBannerBox.hero-banner {
+    box-shadow: 0 24px 70px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.035) !important;
+}
+
+#heroBannerBox .ad-slide::after {
+    background: linear-gradient(180deg, rgba(255,255,255,.045), transparent 12%, transparent 58%, rgba(9,11,16,.22) 78%, rgba(9,11,16,.72) 94%, #090b10 100%) !important;
+}
+
+#heroBannerBox .ad-slide::before {
+    box-shadow: inset 22px 0 34px -34px rgba(255,255,255,.58), inset -22px 0 34px -34px rgba(255,255,255,.58) !important;
+}
+
+/* ============================================================
+   DEFAULT FEATURED BANNER — editorial streaming presentation
+   ============================================================ */
+.hero-banner .default-hero-art {
+    background:
+        linear-gradient(90deg, rgba(5, 7, 11, .08) 0%, rgba(5, 7, 11, .22) 35%, rgba(5, 7, 11, .96) 100%),
+        linear-gradient(180deg, rgba(5, 7, 11, .04) 42%, rgba(5, 7, 11, .96) 100%),
+        url('../data/cache/images/008bece02d7c4b6672d512b5ee1ebc1edd488c3c.jpg') center 28% / cover no-repeat !important;
+    filter: saturate(.92) contrast(1.06) !important;
+    transform: scale(1.015) !important;
+}
+
+.hero-banner .default-hero-content {
+    justify-content: center !important;
+    max-width: 720px !important;
+    padding: 96px 8vw 112px !important;
+}
+
+/* Final right-edge override for desktop hero copy */
+.hero-banner .ad-content,
+.hero-banner .default-hero-content {
+    width: min(560px, 38vw) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    padding: 90px 3.5vw 120px 0 !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    text-align: right !important;
+}
+
+.hero-banner .ad-content .ad-kicker,
+.hero-banner .default-hero-content .ad-kicker {
+    margin-bottom: 16px !important;
+    color: #e7b85c !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 3px !important;
+    text-align: right !important;
+}
+
+.hero-banner .default-hero-content .ad-title,
+.hero-banner .ad-content .ad-title {
+    max-width: 620px !important;
+    font-size: clamp(42px, 5.2vw, 78px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: 0 !important;
+    text-align: right !important;
+    margin: 0 !important;
+}
+
+.hero-banner .default-hero-content .ad-desc,
+.hero-banner .ad-content .ad-desc {
+    max-width: 520px !important;
+    margin-top: 18px !important;
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    text-align: right !important;
+}
+
+.hero-banner .default-hero-content .ad-meta,
+.hero-banner .ad-content .ad-meta {
+    justify-content: flex-end !important;
+    text-align: right !important;
+}
+
+.hero-banner .default-hero-actions {
+    margin-top: 26px !important;
+}
+
+.hero-banner .default-hero-actions .watch-now-btn,
+.hero-banner .default-hero-actions .hero-info-btn {
+    min-height: 48px !important;
+    padding: 12px 24px !important;
+    border-radius: 7px !important;
+    font-size: 15px !important;
+    transition: transform .2s ease, background .2s ease !important;
+}
+
+.hero-banner .default-hero-actions .watch-now-btn:hover,
+.hero-banner .default-hero-actions .hero-info-btn:hover {
+    transform: translateY(-2px) !important;
+}
+
+.hero-banner .default-hero-content + .hero-volume-btn {
+    top: auto !important;
+    right: 32px !important;
+    left: auto !important;
+    bottom: 38px !important;
+}
+
+@media (max-width: 600px) {
+    .hero-banner .default-hero-content {
+        max-width: none !important;
+        padding: 88px 24px 112px !important;
+    }
+
+    .hero-banner .default-hero-content .ad-kicker {
+        font-size: 10px !important;
+        letter-spacing: 2px !important;
+    }
+
+    .hero-banner .default-hero-content .ad-title {
+        font-size: 38px !important;
+    }
+
+    .hero-banner .default-hero-content .ad-desc {
+        font-size: 14px !important;
+        line-height: 1.65 !important;
+    }
+
+    .hero-banner .default-hero-content + .hero-volume-btn {
+        right: 18px !important;
+        bottom: 22px !important;
+    }
+}
+
+/* Keep the featured banner directly below the fixed header. */
+#main {
+    padding-top: 0 !important;
+}
+
+#heroBannerBox.hero-banner {
+    width: 100% !important;
+    height: 100vh !important;
+    min-height: 560px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 1050px) {
+    #heroBannerBox.hero-banner {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    #main {
+        padding-top: 0 !important;
+    }
+
+    #heroBannerBox.hero-banner {
+        width: 100% !important;
+        height: 100svh !important;
+        min-height: 520px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+}
+
+/* Shahid-style full-bleed hero: the image belongs to the page, not a card. */
+body,
+#appContainer,
+#main,
+#mainContent {
+    background: #080b10 !important;
+}
+
+#heroBannerBox .hero-content,
+#heroBannerBox .ad-slide,
+#heroBannerBox .ad-slide::after,
+#heroBannerBox .ad-slide::before {
+    border-radius: 0 !important;
+}
+
+#heroBannerBox .default-hero-art {
+    background:
+        linear-gradient(90deg, rgba(5, 7, 11, .02) 0%, rgba(5, 7, 11, .12) 42%, rgba(5, 7, 11, .95) 100%),
+    linear-gradient(180deg, rgba(5, 7, 11, .02) 40%, rgba(5, 7, 11, .16) 58%, rgba(5, 7, 11, .54) 76%, rgba(5, 7, 11, .86) 91%, #080b10 100%),
+        url('../data/cache/images/008bece02d7c4b6672d512b5ee1ebc1edd488c3c.jpg') center 28% / cover no-repeat !important;
+}
+
+#heroBannerBox .glass-overlay {
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(8, 11, 16, .08) 45%, rgba(8, 11, 16, .88) 100%),
+        linear-gradient(180deg, rgba(8, 11, 16, .02) 40%, rgba(8, 11, 16, .12) 58%, rgba(8, 11, 16, .48) 76%, rgba(8, 11, 16, .86) 92%, #080b10 100%) !important;
+}
+
+#mainContent {
+    margin-top: 0 !important;
+    background: linear-gradient(180deg, transparent 0, transparent 260px, rgba(8,11,16,.22) 340px, #080b10 460px, #080b10 100%) !important;
+}
+
+/* Final hero text lock: lower-right banner composition */
+.hero-banner .ad-content,
+.hero-banner .default-hero-content {
+    justify-content: flex-end !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+    padding: 0 3.5vw 12vh 0 !important;
+    width: min(560px, 38vw) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+.hero-poster-card {
+    position: absolute !important;
+    left: 24px !important;
+    bottom: 16px !important;
+    z-index: 18 !important;
+    width: 126px !important;
+    height: 176px !important;
+    border-radius: 18px !important;
+    border: 2px solid rgba(255,255,255,.16) !important;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.38)),
+        url('../data/cache/images/008bece02d7c4b6672d512b5ee1ebc1edd488c3c.jpg') center center / cover no-repeat !important;
+    box-shadow: 0 22px 42px rgba(0,0,0,.42) !important;
+    overflow: hidden !important;
+}
+
+.hero-poster-card::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.08), rgba(0,0,0,.28)) !important;
+}
+
+.hero-bottom-strip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px 20px;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hero-banner .ad-content .ad-title,
+.hero-banner .default-hero-content .ad-title,
+.hero-banner .ad-content .ad-desc,
+.hero-banner .default-hero-content .ad-desc,
+.hero-banner .ad-content .ad-meta,
+.hero-banner .default-hero-content .ad-meta,
+.hero-banner .ad-content .ad-kicker,
+.hero-banner .default-hero-content .ad-kicker {
+    text-align: right !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+}
+
+.hero-banner .ad-content .ad-title,
+.hero-banner .default-hero-content .ad-title {
+    margin: 0 !important;
+    transform: none !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* Full-bleed hero: no frame or black strip at the bottom. */
+#heroBannerBox.hero-banner,
+#heroBannerBox .hero-content,
+#heroBannerBox .ad-slide {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#heroBannerBox .ad-slide::before {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#heroBannerBox .hero-bottom-strip {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Preserve source resolution for high-resolution advertisements. */
+#heroBannerBox .ad-slide img,
+#heroBannerBox .ad-slide video {
+    image-rendering: auto !important;
+    backface-visibility: hidden !important;
+    transform: translateZ(0) !important;
+}
+
+/* Light Shahid-style copy block on the right side of the hero. */
+@media (min-width: 601px) {
+    #heroBannerBox .ad-content,
+    #heroBannerBox .default-hero-content {
+        position: absolute !important;
+        inset-block: 0 !important;
+        left: auto !important;
+        right: 0 !important;
+        inset-inline-start: 0 !important;
+        inset-inline-end: auto !important;
+        width: min(460px, 34vw) !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-inline: 0 !important;
+        transform: none !important;
+        padding: 90px 3vw 150px 0 !important;
+        align-items: flex-start !important;
+        justify-content: flex-end !important;
+        direction: rtl !important;
+        text-align: right !important;
+        background: linear-gradient(270deg, rgba(5,7,11,.38), rgba(5,7,11,.12) 68%, transparent 100%) !important;
+    }
+
+    #heroBannerBox .ad-content .ad-kicker,
+    #heroBannerBox .ad-content .ad-year,
+    #heroBannerBox .ad-content .ad-title,
+    #heroBannerBox .ad-content .ad-meta,
+    #heroBannerBox .ad-content .ad-desc,
+    #heroBannerBox .default-hero-content .ad-kicker,
+    #heroBannerBox .default-hero-content .ad-year,
+    #heroBannerBox .default-hero-content .ad-title,
+    #heroBannerBox .default-hero-content .ad-meta,
+    #heroBannerBox .default-hero-content .ad-desc {
+        text-align: right !important;
+    }
+
+    #heroBannerBox .ad-content .ad-meta,
+    #heroBannerBox .default-hero-content .ad-meta {
+        justify-content: flex-end !important;
+    }
+
+    #heroBannerBox .ad-content .ad-title,
+    #heroBannerBox .default-hero-content .ad-title {
+        font-size: clamp(36px, 4.2vw, 64px) !important;
+        line-height: 1.08 !important;
+        text-shadow: 0 3px 24px rgba(0,0,0,.62) !important;
+    }
+
+    #heroBannerBox .ad-content .ad-desc,
+    #heroBannerBox .default-hero-content .ad-desc {
+        max-width: 390px !important;
+        font-size: 14px !important;
+        line-height: 1.7 !important;
+    }
+}

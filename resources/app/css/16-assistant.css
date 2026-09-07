@@ -1,0 +1,72 @@
+.venom-assistant-toggle {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    z-index: 10020;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,212,59,.45);
+    border-radius: 50%;
+    background: #ffd43b;
+    color: #111;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.venom-assistant-panel {
+    position: fixed;
+    left: 22px;
+    bottom: 82px;
+    z-index: 10019;
+    width: min(360px, calc(100vw - 36px));
+    height: min(520px, calc(100vh - 120px));
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 16px;
+    background: #11151d;
+    box-shadow: 0 22px 70px rgba(0,0,0,.55);
+    direction: rtl;
+}
+.venom-assistant-panel.open { display: flex; }
+.venom-assistant-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    color: #fff;
+}
+.venom-assistant-head strong,
+.venom-assistant-head small { display: block; }
+.venom-assistant-head small { margin-top: 3px; color: #a9b0bc; font-size: 11px; }
+.venom-assistant-close {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+.venom-assistant-messages {
+    flex: 1;
+    overflow: auto;
+    padding: 14px;
+}
+.venom-assistant-message {
+    max-width: 88%;
+    margin: 0 0 10px auto;
+    padding: 9px 11px;
+    border-radius: 10px;
+    color: #eef1f5;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+.venom-assistant-message.assistant { background: #202631; }
+.venom-assistant-message.user { margin-right: auto; margin-left: 0; background: #315d50; }
+.venom-assistant-message.error { color: #ff9a9f; }
+.venom-assistant-form { display: flex; gap: 7px; padding: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+.venom-assistant-form input { min-width: 0; flex: 1; padding: 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: #0b0e14; color: #fff; outline: none; }
+.venom-assistant-form button { border: 0; border-radius: 9px; padding: 0 12px; background: #ffd43b; color: #111; font-weight: 800; cursor: pointer; }
+@media (max-width: 560px) { .venom-assistant-toggle { left: 14px; bottom: 14px; } .venom-assistant-panel { left: 14px; bottom: 72px; } }
